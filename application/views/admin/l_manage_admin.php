@@ -5,11 +5,11 @@
 	<div class="navbar navbar-inverse">
 		<div class="container">
 			<div class="navbar-header">
-				<span class="navbar-brand">Manage Admin</span>
+				<span class="navbar-brand" style = "color:white">User Manajemen</span>
 			</div>
-		<div class="navbar-collapse collapse navbar-inverse-collapse" style="margin-right: -20px">
+		<div class="navbar-collapse collapse navbar-inverse-collapse" style="margin-right: 20px">
 			<ul class="nav navbar-nav">
-				<li><a href="<?php echo base_URL(); ?>index.php/admin/manage_admin/add" class="btn-info"><i class="icon-plus-sign icon-white"> </i> Tambah Data</a></li>
+				<li><a href="<?php echo base_URL(); ?>index.php/admin/manage_admin/add" class="btn-success" style = "color:white"><i class="icon-plus-sign icon-white"> </i> Tambah Data</a></li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
@@ -31,9 +31,11 @@
 	<thead>
 		<tr>
 			<th width="5%">ID</th>
-			<th width="30%">Username</th>
+			<th width="20%">Username</th>
 			<th width="30%">Nama, NIP</th>
-			<th width="20%">Level</th>
+			<th width="10%">Jabatan</th>
+			<th width="10%">Seksi</th>
+			<th width="10%">Level</th>
 			<th width="15%">Aksi</th>
 		</tr>
 	</thead>
@@ -50,6 +52,8 @@
 			<td class="ctr"><?php echo $b->id;?></td>
 			<td><?php echo $b->username?></td>
 			<td><?php echo $b->nama."<br>".$b->nip?></td>
+			<td><?php echo $b->jabatan?></td>
+			<td><?php echo $b->seksi?></td>
 			<td><?php echo $b->level?></td>
 			<td class="ctr">
 				<div class="btn-group">

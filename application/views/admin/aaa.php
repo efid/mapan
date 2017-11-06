@@ -36,10 +36,12 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>aset/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>aset/css/bootstrap.css" media="screen"> 
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Font Awesome 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>aset/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <!-- Ionicons 
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -71,7 +73,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
     <!-- Morris.js charts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script> 
     <script src="<?php echo base_url(); ?>plugins/morris/morris.min.js"></script>
     <!-- Sparkline -->
     <script src="<?php echo base_url(); ?>plugins/sparkline/jquery.sparkline.min.js"></script>
@@ -80,8 +82,8 @@
     <script src="<?php echo base_url(); ?>plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
     <!-- jQuery Knob Chart -->
     <script src="<?php echo base_url(); ?>plugins/knob/jquery.knob.js"></script>
-    <!-- daterangepicker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <!-- daterangepicker 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script> -->
     <script src="<?php echo base_url(); ?>plugins/daterangepicker/daterangepicker.js"></script>
     <!-- datepicker -->
     <script src="<?php echo base_url(); ?>plugins/datepicker/bootstrap-datepicker.js"></script>
@@ -94,7 +96,7 @@
     <!-- AdminLTE App -->
     <script src="<?php echo base_url(); ?>dist/js/app.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
     <script src="<?php echo base_url(); ?>dist/js/pages/dashboard.js"></script>
 	
 	
@@ -152,6 +154,22 @@
 		});
 		
 		
+		$(function () {
+			$( "#nip" ).autocomplete({
+				source: function(request, response) {
+					$.ajax({ 
+						url: "<?php echo site_url('index.php/admin/get_nip'); ?>",
+						data: { nip: $("#nip").val()},
+						dataType: "json",
+						type: "POST",
+						success: function(data){
+							response(data);
+						}    
+					});
+				},
+			});
+		});
+		
 		$(function() {
 			$( "#tgl_surat" ).datepicker({
 				changeMonth: true,
@@ -168,7 +186,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top" style="background : black">
       <div class="container">
         <div class="navbar-header">
-         <span class="navbar-brand"><strong style="font-family: verdana; color:white ">NAMPOL</strong></span>
+         <span class="navbar-brand"><strong style="font-family: verdana; color:white ">MAPAN</strong></span>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -177,51 +195,85 @@
         </div> 
 
         <div class="navbar-collapse collapse" id="navbar-main" style="font-family: verdana; ">
-          <ul class="nav navbar-nav">	
-			<li><a href="<?php echo base_url(); ?>index.php/admin"><i class="icon-home icon-white"> </i> Beranda</a></li>
-            <li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="icon-th-list icon-white"> </i> Referensi <span class="caret" ></span></a>
+          <ul class="nav navbar-nav" >	
+			<li><a href="<?php echo base_url(); ?>index.php/admin"><i class="icon-home icon-white" > </i> <span style="color:white">Beranda</span></a></li>
+        <?php
+			if ($this->session->userdata('admin_level') != "KK") {
+		?>	    
+			
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="icon-th-list icon-white"> </i> <span style="color:white">Referensi </span><span class="caret" ></span></a>
 				<ul class="dropdown-menu" aria-labelledby="themes">
-				<li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/klas_surat">Klasifikasi Surat</a></li>
+				<li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/klas_surat">Referensi Jenis Surat</a></li>
+				<li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/klas_surat">Referensi Seksi</a></li>
+				<li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/klas_surat">Referensi Jabatan</a></li>
+				<li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/klas_surat">Referensi Golongan</a></li>
 				</ul>
             </li>
+			
 		<?php
-		if ($this->session->userdata('admin_level') != "Super Admin") {
+			}
+		?>		
+			
+		<?php
+		if ($this->session->userdata('admin_level') == "Umum") {
 		?>	
-		<li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="icon-random icon-white"> </i> Catat Surat <span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="themes">
-                <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/surat_masuk">Surat Masuk</a></li>
-                <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/surat_keluar">Surat Keluar</a></li>
-              </ul>
-            </li>
-            	<?php } ?>
+            	
 			<li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="icon-file icon-white"> </i> Buku Agenda <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="icon-file icon-white"> </i> <span style="color:white">Buku Agenda </span><span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
                 <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/agenda_surat_masuk"> Surat Masuk</a></li>
                 <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/agenda_surat_keluar"> Surat Keluar</a></li>
               </ul>
             </li>
-		
+			
+			<?php } ?>
+			
+			<?php
+			if ($this->session->userdata('admin_level') != "Super Admin") {
+			?>
+
+			<li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="icon-random icon-white"> </i> <span style="color:white">Daftar Surat </span><span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="themes">
+                <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/surat_masuk">Surat Masuk</a></li>
+                <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/surat_keluar">Surat Keluar</a></li>
+              </ul>
+            </li>
+
+			<?php } ?>
+			
+			<?php
+			if ($this->session->userdata('admin_level') != "Super Admin") {
+			?>
+			
+			<li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="icon-random icon-white"> </i> <span style="color:white">Data Pegawai</span><span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="themes">
+                <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/pegawai">Daftar Pegawai</a></li>
+              </ul>
+            </li>
+			
+			<?php }?>
+			
 			<?php
 			if ($this->session->userdata('admin_level') == "Super Admin") {
 			?>
-		<li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="icon-wrench icon-white"> </i> Pengaturan <span class="caret"></span></a>
+			<li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="icon-wrench icon-white"> </i> <span style="color:white">Setting </span><span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
                 <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/pengguna">Instansi Pengguna</a></li>
-                <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/manage_admin">Manajemen Admin</a></li>
+                <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/manage_admin">Manajemen User</a></li>
               </ul>
             </li>
-			<?php 
-			}
-			?>
-          </ul>
+			<?php } ?>
+			
+			
+			</ul>
 
           <ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="icon-user icon-white"></i> User Account <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes" style = "color:white"><i class="icon-user icon-white"></i> <?php echo $this->session->userdata('admin_user') ?> <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
                 <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/passwod">Change Password</a></li>
                 <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/logout">Logout</a></li>
@@ -240,17 +292,16 @@
 	?>
     <div class="container">
 
-      <div class="page-header" id="banner">
+
         <div class="row">
-          <div class="" style="padding: 15px 15px 0 15px;">
-			<div class="well well-sm">
-				<img src="<?php echo base_url(); ?>upload/<?php echo $q_instansi->logo; ?>" class="thumbnail span3" style="display: inline; float: left; margin-right: 20px; width: 100px; height: 100px">
-                <h2 style="margin: 15px 0 10px 0; color: #000;"><?php echo $q_instansi->nama; ?></h2>
-                <div style="color: #000; font-size: 16px; font-family: Tahoma" class="clearfix"><b>Alamat : <?php echo $q_instansi->alamat; ?></b></div>
+          <div class="" style="padding: 15px 15px 5px 15px;">
+			<div class="well well-sm bg-blue" color:white>
+				<img src="<?php echo base_url(); ?>upload/<?php echo $q_instansi->logo; ?>" class="thumbnail span3" style="display: inline; float: left; margin-right: 20px; margin-top: 10px; width: 100px; height: 100px">
+                <h2 style="margin: 15px 0 10px 0; color: white;"><?php echo $q_instansi->nama; ?></h2>
+                <div style="color: white; font-size: 14px; font-family: Tahoma" class="clearfix"><b>Alamat : <?php echo $q_instansi->alamat; ?></b></div>
              </div>
           </div>
         </div>
-      </div>
 
 		<?php $this->load->view('admin/'.$page); ?>
 	
@@ -258,9 +309,8 @@
 
 
 	
-	  <div class="span12 well well-sm">
-		<h4 style="font-weight: bold">MAPAN ONLINE - MANAJEMEN PERSURATAN ONLINE</h4>
-		<h6>&copy;  2017. Waktu Eksekusi : {elapsed_time}, Penggunaan Memori : {memory_usage}</h6>
+	  <div class="span12 well well-sm bg-blue" style="color:white">
+		<h4 style="color:white">MAPAN - Manajemen Persuratan</h4>
 	  </div>
  
     </div>

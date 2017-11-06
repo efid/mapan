@@ -3,11 +3,15 @@
   <div class="col-lg-12">
 	
 	<div class="navbar navbar-inverse">
-		<div class="container  bg-green">
+		<div class="container">
 			<div class="navbar-header">
-				<div class="navbar-brand" style = "color:white">Jenis Surat</div>
+				<span class="navbar-brand" style = "color:white">Jenis Surat</span>
 			</div>
-		<div class="navbar-collapse collapse navbar-inverse-collapse" style="margin-right: -20px">
+		<div class="navbar-collapse collapse navbar-inverse-collapse" style="margin-right: 20px">
+			<ul class="nav navbar-nav">
+				<li><a href="<?php echo base_URL(); ?>index.php/admin/surat_keluar/add" class="btn-success" style="color:white"><i class="fa fa-plus" > </i> Tambah Data</a></li>
+			</ul>
+			
 			<ul class="nav navbar-nav navbar-right">
 				<form class="navbar-form navbar-left" method="post" action="<?php echo base_URL(); ?>index.php/admin/klas_surat/cari">
 					<input type="text" class="form-control" name="q" style="width: 200px" placeholder="Kata kunci pencarian ..." required>

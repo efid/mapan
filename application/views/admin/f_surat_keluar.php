@@ -55,7 +55,7 @@ if ($mode == "edt" || $mode == "act_edt") {
 		<table width="100%" class="table-form">
 			<tr><td width="20%">Kode Klasifikasi</td><td><b><input type="text" tabindex="5" name="kode" required value="<?php echo $kode; ?>" id="kode_surat" style="width: 100px" class="form-control"></b></td></tr>
 			<tr><td width="20%">Tanggal Surat</td><td><b><input type="text" tabindex="6" name="tgl_surat" required value="<?php echo $tgl_surat; ?>" id="tgl_surat" style="width: 100px" class="form-control"></b></td></tr>	
-			<tr><td width="20%">File Surat (Scan)</td><td><b><input type="file" tabindex="7" name="file_surat" class="form-control" style="width: 200px"></b></td></tr>
+			<tr><td width="20%">File Surat (Scan)</td><td><b><input type="file" tabindex="7" required name="file_surat" class="form-control" style="width: 200px"></b></td></tr>
 			<tr><td width="20%">Keterangan</td><td><b><input type="text" name="ket" tabindex="8" value="<?php echo $ket; ?>" style="width: 400px" class="form-control"></b></td></tr>				
 		</table>
 	</div>

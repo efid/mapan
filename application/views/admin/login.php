@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>.:: NAMPOL - MANAJEMEN PERSURATAN ONLINE::.</title>
+    <title>.:: MAPAN ONLINE - MANAJEMEN PERSURATAN ONLINE::.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
 	<style type="text/css">
@@ -41,7 +41,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <span class="navbar-brand"><strong style="font-family: verdana; text-align: center">NAMPOL - Manajemen Persuratan Online</strong></span>
+          <span class="navbar-brand"><strong style="font-family: verdana; text-align: center">MAPAN ONLINE - Manajemen Persuratan Online</strong></span>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -62,7 +62,7 @@
 	<div class="container-fluid" style="margin-top: 30px">
 	
       <div class="row-fluid">
-		<div style="width: 400px; margin: 0 auto">
+		<div style="width: 600px; margin: 0 auto">
 			<div class="well well-sm">
 				<img src="<?php echo base_url(); ?>upload/<?php echo $q_instansi->logo; ?>" class="thumbnail span3" style="display: inline; float: left; margin-right: 20px; width: 80px; height: 80px">
 				<h3 style="margin: 5px 0 0.4em 0; font-size: 21px; color: #000; font-weight: bold"><?php echo $q_instansi->nama; ?></h3>
@@ -70,13 +70,13 @@
 			 </div>
 		</div>
 		
-		<div class="well" style="width: 400px; margin: 20px auto; border: solid 1px #d9d9d9; padding: 30px 20px; border-radius: 8px">
+		<div class="well" style="width: 600px; margin: 20px auto; border: solid 1px #d9d9d9; padding: 30px 20px; border-radius: 8px">
 		<form action="<?php echo base_URL(); ?>index.php/admin/do_login" method="post">
 		<center><legend>LOGIN FORM</legend></center>	
 		<?php echo $this->session->flashdata("k"); ?>
 		<table align="center" style="margin-bottom: 0" class="table-form" width="90%">
-			<tr><td width="40%">Username</td><td><input type="text" autofocus name="u" required style="width: 200px" autofocus class="form-control"></td></tr>
-			<tr><td>Password</td><td><input type="password" name="p" required style="width: 200px" class="form-control"></td></tr>
+			<tr><td width="40%">Username</td><td><input type="text" autofocus name="u" required  autofocus class="form-control"></td></tr>
+			<tr><td>Password</td><td><input type="password" name="p" required class="form-control"></td></tr>
 			<tr><td>Tahun</td><td><select name="ta" class="form-control" required><option value="">--</option>
 			<?php 
 			for ($i = 2016; $i <= (date('Y')); $i++) {

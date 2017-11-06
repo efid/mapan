@@ -5,11 +5,11 @@
 	<div class="navbar navbar-inverse">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Surat Keluar</a>
+				<a class="navbar-brand" style="color:white">Surat Keluar</a>
 			</div>
-		<div class="navbar-collapse collapse navbar-inverse-collapse" style="margin-right: -20px">
+		<div class="navbar-collapse collapse navbar-inverse-collapse" style="margin-right: 20px">
 			<ul class="nav navbar-nav">
-				<li><a href="<?php echo base_URL(); ?>index.php/admin/surat_keluar/add" class="btn-info"><i class="icon-plus-sign icon-white"> </i> Tambah Data</a></li>
+				<li><a href="<?php echo base_URL(); ?>index.php/admin/surat_keluar/add" class="btn btn-success" style="color:white"><i class="fa fa-plus" > </i> Tambah Data</a></li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">

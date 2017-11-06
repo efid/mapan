@@ -4,16 +4,40 @@
 
 		<div class="alert alert-dismissable alert-success">
 			Selamat datang <strong><?php echo $this->session->userdata('admin_nama'); ?></strong> 
+			<?php 
+			echo"( " ; 
+			echo $this->session->userdata('admin_jabatan'); 
+			echo" " ;
+			echo $this->session->userdata('admin_seksi');
+			echo" )"?>
 		</div>
 			
       </div>
-
 	<?php 
-	$klr	= $this->db->query("SELECT COUNT(NO_AGENDA) as jml FROM t_surat_keluar WHERE YEAR(TGL_SURAT)='2017'")->row();
+	  $ta = $this->session->userdata('admin_ta');
 	?>
 	<?php 
-	$msk	= $this->db->query("SELECT COUNT(NO_AGENDA) as jml FROM t_surat_masuk WHERE YEAR(TGL_SURAT)='2017'")->row();
+	$klr	= $this->db->query("SELECT COUNT(NO_AGENDA) as jml FROM t_surat_keluar WHERE deleted=0 and  YEAR(TGL_SURAT)='$ta'")->row();
 	?>
+	<?php 
+	$msk	= $this->db->query("SELECT COUNT(NO_AGENDA) as jml FROM t_surat_masuk WHERE deleted=0 and YEAR(TGL_SURAT)='$ta'")->row();
+	?>
+	  
+	<?php 
+	$disp	= $this->db->query("SELECT count(id) jml FROM t_surat_masuk a 
+	left join (select distinct id_surat from t_disposisi )b on a.id=b.id_surat
+	WHERE deleted=0 and year(a.tgl_diterima)='$ta' and id_surat is NULL")->row();
+	?>
+	
+	<?php 
+	$dispkasi	= $this->db->query("SELECT count(a.kode) jml
+						FROM t_surat_masuk a 
+						left join ref_klasifikasi b on a.kode=b.kode 
+						left join (select distinct id_surat,nip_pelaksana from t_disposisi where nip_pelaksana <> '' group by id_surat) d on a.id=d.id_surat
+						WHERE a.deleted = 0 and YEAR(tgl_diterima) = '2017'  and nip_pelaksana is NULL")->row();
+	?>
+	
+	
 	  
 	  	  
 	  <div class="row">
@@ -49,37 +73,37 @@
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>44</h3>
-                  <p>Surat Masuk belum disposisi</p>
+                  <h3><?php echo $disp->jml; ?></h3>
+                  <p>Belum disposisi KK</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <i class="fa fa-folder-o"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>index.php/admin/klas_surat" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>index.php/admin/surat_masuk_disp" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3>65</h3>
-                  <p>User Pengguna</p>
+                  <h3><?php echo $dispkasi->jml; ?></h3>
+                  <p>Belum Disposisi Kasi</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
+                  <i class="fa fa-folder-o"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>index.php/admin/surat_masuk" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
 			
 			
            <section class="col-lg-6 col-sm-1 connectedSortable">
-				<li class="pull-left header"><i class="fa fa-inbox"></i> Surat Masuk</li>
+				<span class="pull-left header"><i class="fa fa-inbox"></i> Surat Masuk</span>
 				<div id="masuk"></div>
 			</section>
 			
 			<section class="col-lg-6 col-sm-1 connectedSortable">
-				<li class="pull-left header"><i class="fa fa-inbox"></i> Surat Keluar</li>
+				<span class="pull-left header"><i class="fa fa-inbox"></i> Surat Keluar</span>
 				<div id="keluar"></div>
 			</section>
 			
@@ -96,8 +120,8 @@ element: 'masuk',
 data: [
 { year: '2010', value: 20 },
 { year: '2011', value: 10 },
-{ year: '2012', value: 5},
-{ year: '2013', value: 5},
+{ year: '2012', value: 15},
+{ year: '2013', value: 15},
 { year: '2014', value: 10},
 { year: '2015', value: 15},
 { year: '2016', value: 20},

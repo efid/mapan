@@ -60,10 +60,10 @@ if ($mode == "edt" || $mode == "act_edt") {
 	<div class="col-lg-6">	
 		<table  class="table-form">
 		<tr><td width="20%">Kode Klasifikasi</td><td><b><input type="text" name="kode" tabindex="5" id="kode_surat" required value="<?php echo $kode; ?>" style="width: 100px" class="form-control"></b></td></tr>
-		<tr><td width="20%">Indeks Berkas</td><td><b><input type="text" name="indek_berkas" tabindex="6" value="<?php echo $indek_berkas; ?>" style="width: 300px" class="form-control"></b></td></tr>
+<!--		<tr><td width="20%">Indeks Berkas</td><td><b><input type="text" name="indek_berkas" tabindex="6" value="<?php echo $indek_berkas; ?>" style="width: 300px" class="form-control"></b></td></tr>-->
 		<tr><td width="20%">Tanggal Surat</td><td><b><input type="text" name="tgl_surat" tabindex="7" required value="<?php echo $tgl_surat; ?>" id="tgl_surat" style="width: 100px" class="form-control"></b></td></tr>	
-		<tr><td width="20%">File Surat (Scan)</td><td><b><input type="file" name="file_surat" tabindex="8" class="form-control" style="width: 200px"></b></td></tr>
-		<tr><td width="20%">Keterangan</td><td><b><input type="text" name="ket" value="<?php echo $ket; ?>" tabindex="9" style="width: 400px" class="form-control"></b></td></tr>	
+		<tr><td width="20%">File Surat (Scan)</td><td><b><input type="file" name="file_surat" tabindex="8" required class="form-control" style="width: 200px"></b></td></tr>
+		<tr><td width="20%">Keterangan</td><td><b><input type="text" name="ket" value="<?php echo $ket; ?>" tabindex="9"  style="width: 400px" class="form-control"></b></td></tr>	
 		</table>	
 	</div>
 
