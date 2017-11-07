@@ -8,9 +8,6 @@
 				<span class="navbar-brand" style = "color:white">Daftar Pegawai</span>
 			</div>
 		<div class="navbar-collapse collapse navbar-inverse-collapse" style="margin-right: 20px">
-			<ul class="nav navbar-nav">
-				<li><a href="<?php echo base_URL(); ?>index.php/admin/surat_keluar/add" class="btn-success" style="color:white"><i class="fa fa-plus" > </i> Tambah Data</a></li>
-			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
 				<form class="navbar-form navbar-left" method="post" action="<?php echo base_URL(); ?>index.php/admin/klas_surat/cari">
@@ -43,17 +40,12 @@
 	<thead>
 		<tr>
 			<th width="5%">Nomor</th>
-			<th width="20%">Nama</th>
-			<th width="15%">NIP</th>
-			<th width="10%">Seksi</th>
-			<th width="10%">jabatan</th>
-			<th width="5%">Gol</th>
-			<th width="10%">Tgl Lahir</th>
-			<th width="10%">Tempat Lahir</th>
-			<th width="5%">Pendidikan</th>
-			<th width="10%">Status</th>
-			<th width="5%">Anak</th>
-			<th width="5%">Jenis Kelamin</th>
+			<th width="25%">Nama</th>
+			<th width="25%">NIP</th>
+			<th width="25%">Seksi</th>
+			<th width="20%">jabatan</th>
+			<th width="20%">Email</th>
+			
 		</tr>
 	</thead>
 	
@@ -73,13 +65,8 @@
 			<td><?php echo $b->nip; ?></td>
 			<td><?php echo $b->seksi; ?></td>
 			<td><?php echo $b->jabatan; ?></td>
-			<td><?php echo $b->golongan; ?></td>
-			<td><?php echo $b->tgl_lahir; ?></td>
-			<td><?php echo $b->tmp_lahir; ?></td>
-			<td><?php echo $b->pendidikan; ?></td>
-			<td><?php echo $b->status; ?></td>
-			<td><?php echo $b->anak; ?></td>
-			<td><?php echo $b->jns_kelamin; ?></td>
+			<td><?php echo $b->email; ?></td>
+
 			
 			<?php 
 			if ($this->session->userdata('admin_user') == "umum") {

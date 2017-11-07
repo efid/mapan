@@ -205,9 +205,7 @@
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="icon-th-list icon-white"> </i> <span style="color:white">Referensi </span><span class="caret" ></span></a>
 				<ul class="dropdown-menu" aria-labelledby="themes">
 				<li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/klas_surat">Referensi Jenis Surat</a></li>
-				<li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/klas_surat">Referensi Seksi</a></li>
-				<li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/klas_surat">Referensi Jabatan</a></li>
-				<li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/klas_surat">Referensi Golongan</a></li>
+
 				</ul>
             </li>
 			

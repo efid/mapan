@@ -9,7 +9,9 @@
 			echo $this->session->userdata('admin_jabatan'); 
 			echo" " ;
 			echo $this->session->userdata('admin_seksi');
-			echo" )"?>
+			echo" )";
+			echo" Level User : " ;?>
+			<strong><?php echo $this->session->userdata('admin_level');?></strong>
 		</div>
 			
       </div>
@@ -17,10 +19,10 @@
 	  $ta = $this->session->userdata('admin_ta');
 	?>
 	<?php 
-	$klr	= $this->db->query("SELECT COUNT(NO_AGENDA) as jml FROM t_surat_keluar WHERE deleted=0 and  YEAR(TGL_SURAT)='$ta'")->row();
+	$klr	= $this->db->query("SELECT COUNT(no_surat1) as jml FROM t_surat_keluar WHERE deleted=0 and  YEAR(TGL_SURAT)='$ta'")->row();
 	?>
 	<?php 
-	$msk	= $this->db->query("SELECT COUNT(NO_AGENDA) as jml FROM t_surat_masuk WHERE deleted=0 and YEAR(TGL_SURAT)='$ta'")->row();
+	$msk	= $this->db->query("SELECT COUNT(no_surat) as jml FROM t_surat_masuk WHERE deleted=0 and YEAR(TGL_SURAT)='$ta'")->row();
 	?>
 	  
 	<?php 

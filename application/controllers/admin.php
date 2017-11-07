@@ -97,6 +97,23 @@ class Admin extends CI_Controller {
 		$cari					= addslashes($this->input->post('q'));
 
 		
+				$nip = $this->session->userdata('admin_nip');
+		$seksi = $this->session->userdata('admin_seksi');
+		if ($this->session->userdata('admin_level') == "Staf") {
+			$sql="SELECT * from t_pegawai WHERE nip='$nip' LIMIT $awal, $akhir ";
+			// var_dump($sql);die;
+				
+			}else if ($this->session->userdata('admin_level') == "Kasi"){				
+			$sql ="SELECT * from t_pegawai WHERE  seksi = '$seksi' order by nama asc LIMIT $awal, $akhir";
+					
+			}else {				
+			$sql ="SELECT * from t_pegawai order by nama asc LIMIT $awal, $akhir";
+					
+			}
+
+		
+		
+		
 		if ($mau_ke == "cari") {
 			$a['data']		= $this->db->query("SELECT * FROM ref_klasifikasi WHERE nama LIKE '%$cari%' OR uraian LIKE '%$cari%' ORDER BY id DESC")->result();
 			$a['page']		= "l_klas_surat";
@@ -110,7 +127,7 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been updated</div>");			
 			redirect('index.php/admin/klas_surat');
 		} else {
-			$a['data']		= $this->db->query("SELECT * FROM t_pegawai LIMIT $awal, $akhir ")->result();
+			$a['data']		= $this->db->query($sql)->result();
 			$a['page']		= "l_pegawai";
 		}
 		
@@ -325,7 +342,8 @@ class Admin extends CI_Controller {
 		$indek_berkas			= addslashes($this->input->post('indek_berkas'));
 		$kode					= addslashes($this->input->post('kode'));
 		$dari					= addslashes($this->input->post('dari'));
-		$no_surat				= addslashes($this->input->post('no_surat'));
+		$no_surat1				= addslashes($this->input->post('no_surat1'));
+		$no_surat2				= addslashes($this->input->post('no_surat2'));
 		$tgl_surat				= addslashes($this->input->post('tgl_surat'));
 		$uraian					= addslashes($this->input->post('uraian'));
 		$ket					= addslashes($this->input->post('ket'));
@@ -417,10 +435,11 @@ class Admin extends CI_Controller {
 
 		//ambil variabel Postingan
 		$idp					= addslashes($this->input->post('idp'));
-		$no_agenda				= addslashes($this->input->post('no_agenda'));
+		// $no_agenda				= addslashes($this->input->post('no_agenda'));
 		$kode					= addslashes($this->input->post('kode'));
 		$dari					= addslashes($this->input->post('dari'));
-		$no_surat				= addslashes($this->input->post('no_surat'));
+		$no_surat1				= addslashes($this->input->post('no_surat1'));
+		$no_surat2				= addslashes($this->input->post('no_surat2'));
 		$tgl_surat				= addslashes($this->input->post('tgl_surat'));
 		$uraian					= addslashes($this->input->post('uraian'));
 		$ket					= addslashes($this->input->post('ket'));
@@ -436,6 +455,22 @@ class Admin extends CI_Controller {
 
 		$this->load->library('upload', $config);
 		
+		$nip = $this->session->userdata('admin_nip');
+		$seksi = $this->session->userdata('admin_seksi');
+
+		if ($this->session->userdata('admin_level') == "Kasi") {		
+			$sql="SELECT * FROM t_surat_keluar WHERE deleted=0 and seksi = '$seksi' and YEAR(tgl_catat) = '$ta' order by id desc LIMIT $awal, $akhir ";
+
+		}else if($this->session->userdata('admin_level') == "Staf"){
+			
+			$sql="SELECT * FROM t_surat_keluar WHERE deleted=0 and nip='$nip' and YEAR(tgl_catat) = '$ta' order by id desc LIMIT $awal, $akhir";
+			
+		}else{
+			
+			$sql="SELECT * FROM t_surat_keluar WHERE deleted=0 and YEAR(tgl_catat) = '$ta' order by id desc LIMIT $awal, $akhir";
+			
+		}
+
 		
 		if ($mau_ke == "del") {
 			$this->db->query("DELETE FROM t_surat_keluar WHERE id = '$idu'");
@@ -450,29 +485,43 @@ class Admin extends CI_Controller {
 			$a['datpil']	= $this->db->query("SELECT * FROM t_surat_keluar WHERE id = '$idu'")->row();	
 			$a['page']		= "f_surat_keluar";
 		} else if ($mau_ke == "act_add") {	
-			if ($this->upload->do_upload('file_surat')) {
-				$up_data	 	= $this->upload->data();
+			$sql="INSERT INTO t_surat_keluar (kode,no_surat1,no_surat2,isi_ringkas, tujuan, tgl_surat, tgl_catat, keterangan, seksi,nip, pengolah,deleted) VALUES ('$kode', '$no_surat1','$no_surat2', '$uraian', '$dari',    '$tgl_surat', NOW(), '$ket', '$seksi','$nip', '".$this->session->userdata('admin_id')."',0)";
+			// var_dump($sql);die;
+			$this->db->query($sql);
+		// if ($this->upload->do_upload('file_surat')) {
+				// $up_data	 	= $this->upload->data();
 				
-				$this->db->query("INSERT INTO t_surat_keluar VALUES (NULL, '$kode', '$no_agenda', '$uraian', '$dari', '$no_surat', '$tgl_surat', NOW(), '$ket', '".$up_data['file_name']."', '".$this->session->userdata('admin_id')."',0,'')");
-			} else {
-				$this->db->query("INSERT INTO t_surat_keluar VALUES (NULL, '$kode', '$no_agenda', '$uraian', '$dari', '$no_surat', '$tgl_surat', NOW(), '$ket', '', '".$this->session->userdata('admin_id')."',0,'')");
-			}		
+				// $this->db->query("INSERT INTO t_surat_keluar VALUES (NULL, '$kode', '$no_agenda', '$uraian', '$dari', '$no_surat', '$tgl_surat', NOW(), '$ket', '".$up_data['file_name']."', '".$this->session->userdata('admin_id')."',0,'')");
+			// } else {
+				// $this->db->query("INSERT INTO t_surat_keluar VALUES (NULL, '$kode', '$no_agenda', '$uraian', '$dari', '$no_surat', '$tgl_surat', NOW(), '$ket', '', '".$this->session->userdata('admin_id')."',0,'')");
+			// }		
 			
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been added</div>");
 			redirect('index.php/admin/surat_keluar');
 		} else if ($mau_ke == "act_edt") {
+			
 			if ($this->upload->do_upload('file_surat')) {
 				$up_data	 	= $this->upload->data();
+				$sql="UPDATE t_surat_keluar SET file = '".$up_data['file_name']."' WHERE id = '$idp'";
+				$this->db->query($sql);
+				// var_dump($sql); die;
+			}else{
+				$sql="UPDATE t_surat_keluar SET kode = '$kode',no_surat1 = '$no_surat1',no_surat2 = '$no_surat2', isi_ringkas = '$uraian', tujuan = '$dari', tgl_surat = '$tgl_surat', keterangan = '$ket' WHERE id = '$idp'";
+				$this->db->query($sql);
 				
-				$this->db->query("UPDATE t_surat_keluar SET no_agenda = '$no_agenda', kode = '$kode', isi_ringkas = '$uraian', tujuan = '$dari', no_surat = '$no_surat', tgl_surat = '$tgl_surat', keterangan = '$ket', file = '".$up_data['file_name']."' WHERE id = '$idp'");
-			} else {
-				$this->db->query("UPDATE t_surat_keluar SET no_agenda = '$no_agenda', kode = '$kode', isi_ringkas = '$uraian', tujuan = '$dari', no_surat = '$no_surat', tgl_surat = '$tgl_surat', keterangan = '$ket' WHERE id = '$idp'");
-			}	
+			}
+			// if ($this->upload->do_upload('file_surat')) {
+				// $up_data	 	= $this->upload->data();
+				
+				// $this->db->query("UPDATE t_surat_keluar SET no_agenda = '$no_agenda', kode = '$kode', isi_ringkas = '$uraian', tujuan = '$dari', no_surat = '$no_surat', tgl_surat = '$tgl_surat', keterangan = '$ket', file = '".$up_data['file_name']."' WHERE id = '$idp'");
+			// } else {
+				// $this->db->query("UPDATE t_surat_keluar SET no_agenda = '$no_agenda', kode = '$kode', isi_ringkas = '$uraian', tujuan = '$dari', no_surat = '$no_surat', tgl_surat = '$tgl_surat', keterangan = '$ket' WHERE id = '$idp'");
+			// }	
 			
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been updated ".$this->upload->display_errors()."</div>");			
 			redirect('index.php/admin/surat_keluar');
 		} else {
-			$a['data']		= $this->db->query("SELECT * FROM t_surat_keluar WHERE YEAR(tgl_catat) = '$ta' LIMIT $awal, $akhir ")->result();
+			$a['data']		= $this->db->query($sql)->result();
 			$a['page']		= "l_surat_keluar";
 		}
 		
@@ -690,7 +739,7 @@ class Admin extends CI_Controller {
 		//if (empty($awal) || $awal == 1) { $awal = 0; } { $awal = $awal; }
 		$akhir	= $per_page;
 		
-		$a['pagi']	= _page($total_row, $per_page, 4, base_url()."admin/manage_admin/p");
+		$a['pagi']	= _page($total_row, $per_page, 4, base_url()."index.php/admin/manage_admin/p");
 		
 		//ambil variabel URL
 		$mau_ke					= $this->uri->segment(3);
@@ -702,10 +751,10 @@ class Admin extends CI_Controller {
 		$idp					= addslashes($this->input->post('idp'));
 		$username				= addslashes($this->input->post('username'));
 		$password				= md5(addslashes($this->input->post('password')));
-		$nama					= addslashes($this->input->post('nama'));
+		// $nama					= addslashes($this->input->post('nama'));
 		$nip					= addslashes($this->input->post('nip'));
-		$jabatan				= addslashes($this->input->post('jabatan'));
-		$seksi					= addslashes($this->input->post('seksi'));
+		// $jabatan				= addslashes($this->input->post('jabatan'));
+		// $seksi					= addslashes($this->input->post('seksi'));
 		$level					= addslashes($this->input->post('level'));
 		
 		$cari					= addslashes($this->input->post('q'));
@@ -716,7 +765,7 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been deleted </div>");
 			redirect('index.php/admin/manage_admin');
 		} else if ($mau_ke == "cari") {
-			$a['data']		= $this->db->query("SELECT * FROM t_admin WHERE nama LIKE '%$cari%' ORDER BY id DESC")->result();
+			$a['data']		= $this->db->query("SELECT a.*,b.nama FROM t_admin a left join t_pegawai b on a.nip=b.nip  WHERE b.nama LIKE '%$cari%' or a.nip LIKE '%$cari%' or a.seksi LIKE '%$cari%' or a.level LIKE '%$cari%' or a.jabatan LIKE '%$cari%' ORDER BY seksi DESC")->result();
 			$a['page']		= "l_manage_admin";
 		} else if ($mau_ke == "add") {
 			$a['page']		= "f_manage_admin";
@@ -724,32 +773,40 @@ class Admin extends CI_Controller {
 			$a['datpil']	= $this->db->query("SELECT * FROM t_admin WHERE id = '$idu'")->row();	
 			$a['page']		= "f_manage_admin";
 		} else if ($mau_ke == "act_add") {	
-			$cek_user_exist = $this->db->query("SELECT username FROM t_admin WHERE username = '$username'")->num_rows();
+			$cek_user_exist = $this->db->query("SELECT username FROM t_admin WHERE deleted=0 and username = '$username'")->num_rows();
 
-			if (strlen($username) < 3) {
+			if (strlen($username) < 1) {
 				$this->session->set_flashdata("k", "<div class=\"alert alert-danger\" id=\"alert\">Username minimal 6 huruf</div>");
 			} else if ($cek_user_exist > 0) {
-				$this->session->set_flashdata("k", "<div class=\"alert alert-danger\" id=\"alert\">Username telah dipakai. Ganti yang lain..!</div>");	
+				$this->session->set_flashdata("k", "<div class=\"alert alert-danger\" id=\"alert\">Username telah dipakai. Ganti yang lain..!</div>");
+				
 			} else {
-				$sql="INSERT INTO t_admin (username,password, jabatan, seksi,nama,nip,level) VALUES ('$username', '$password','$jabatan','$seksi', '$nama', '$nip', '$level')";
+				$sql="INSERT INTO t_admin (username,password, nip,level) VALUES ('$username', '$password','$nip', '$level')";
 				// var_dump($sql); die;
 				$this->db->query($sql);
 				$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been added</div>");
 			}
 			
-			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been added</div>");
+			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">has been added</div>");
 			redirect('index.php/admin/manage_admin');
 		} else if ($mau_ke == "act_edt") {
-			if ($password = md5("-")) {
-				$this->db->query("UPDATE t_admin SET username = '$username', jabatan='$jabatan', seksi='$seksi',nama = '$nama', nip = '$nip', level = '$level' WHERE id = '$idp'");
-			} else {
-				$this->db->query("UPDATE t_admin SET username = '$username', password = '$password', nama = '$nama', nip = '$nip', level = '$level' WHERE id = '$idp'");
-			}
+			// $password = md5(addslashes($this->input->post('password')));
+				
+				if ($password == md5("-")) {
+					$sql="UPDATE t_admin SET username = '$username', nip = '$nip', level = '$level' WHERE id = '$idp'";
+					$this->db->query($sql);
+				// var_dump($sql); die;
+				} else {
+					$sql="UPDATE t_admin SET username = '$username', password = '$password', nip = '$nip', level = '$level' WHERE id = '$idp'";
+					$this->db->query($sql);
+					// var_dump($sql); die;
+
+				}
 			
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been updated </div>");			
 			redirect('index.php/admin/manage_admin');
 		} else {
-			$a['data']		= $this->db->query("SELECT * FROM t_admin LIMIT $awal, $akhir ")->result();
+			$a['data']		= $this->db->query("SELECT a.*,b.nama,b.jabatan,b.seksi FROM t_admin a left join t_pegawai b on a.nip=b.nip  where a.deleted=0 order by b.seksi,a.level LIMIT $awal, $akhir ")->result();
 			$a['page']		= "l_manage_admin";
 		}
 		
@@ -857,7 +914,10 @@ class Admin extends CI_Controller {
 		$ta 	= $this->security->xss_clean($this->input->post('ta'));
         $p 		= md5($this->security->xss_clean($this->input->post('p')));
          
-		$q_cek	= $this->db->query("SELECT * FROM t_admin WHERE username = '".$u."' AND password = '".$p."'");
+		 
+		$sql ="SELECT a.*,b.nama,b.seksi,b.jabatan FROM t_admin a left join t_pegawai b on a.nip=b.nip WHERE a.deleted=0 and a.username = '".$u."' AND a.password = '".$p."'";
+		// var_dump($sql); die;
+		$q_cek	= $this->db->query($sql);
 		$j_cek	= $q_cek->num_rows();
 		$d_cek	= $q_cek->row();
 		//echo $this->db->last_query();

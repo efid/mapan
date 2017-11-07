@@ -3,7 +3,7 @@
 # Server version:               5.6.20
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3603
-# Date/time:                    2017-11-06 17:15:21
+# Date/time:                    2017-11-07 16:37:52
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -17,20 +17,21 @@ CREATE TABLE IF NOT EXISTS `ref_klasifikasi` (
   `kode` varchar(50) NOT NULL,
   `nama` varchar(250) NOT NULL,
   `uraian` mediumtext NOT NULL,
+  `format` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 # Dumping data for table asamurat.ref_klasifikasi: ~8 rows (approximately)
 /*!40000 ALTER TABLE `ref_klasifikasi` DISABLE KEYS */;
-INSERT INTO `ref_klasifikasi` (`id`, `kode`, `nama`, `uraian`) VALUES
-	(1, '11', 'NOTA DINAS', 'Nota Dinas'),
-	(2, '12', 'SURAT', 'Surat'),
-	(3, '13', 'SURAT TUGAS', 'Surat Tugas'),
-	(4, '14', 'SURAT PENGANTAR', 'Surat Pengantar'),
-	(5, '15', 'UNDANGAN', 'Undangan'),
-	(6, '16', 'SURAT RAHASIA', 'Surat Rahasia'),
-	(7, '17', 'TAGIHAN', 'Tagihan'),
-	(8, '18', 'PENAWARAN', 'Penawaran');
+INSERT INTO `ref_klasifikasi` (`id`, `kode`, `nama`, `uraian`, `format`) VALUES
+	(1, '11', 'NOTA DINAS', 'Nota Dinas', NULL),
+	(2, '12', 'SURAT', 'Surat', 'WPB.15/KP.01/2017'),
+	(3, '13', 'SURAT TUGAS', 'Surat Tugas', NULL),
+	(4, '14', 'SURAT PENGANTAR', 'Surat Pengantar', NULL),
+	(5, '15', 'UNDANGAN', 'Undangan', NULL),
+	(6, '16', 'SURAT RAHASIA', 'Surat Rahasia', NULL),
+	(7, '17', 'TAGIHAN', 'Tagihan', NULL),
+	(8, '18', 'PENAWARAN', 'Penawaran', NULL);
 /*!40000 ALTER TABLE `ref_klasifikasi` ENABLE KEYS */;
 
 
@@ -55,30 +56,31 @@ INSERT INTO `tr_instansi` (`id`, `nama`, `alamat`, `kepsek`, `nip_kepsek`, `logo
 # Dumping structure for table asamurat.t_admin
 CREATE TABLE IF NOT EXISTS `t_admin` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
-  `username` varchar(15) NOT NULL,
+  `username` varchar(100) NOT NULL,
   `password` varchar(75) NOT NULL,
-  `jabatan` varchar(75) NOT NULL,
-  `seksi` varchar(75) NOT NULL,
-  `nama` varchar(15) NOT NULL,
   `nip` varchar(25) NOT NULL,
   `level` enum('Super Admin','KK','Kasi','Staf','Umum') NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
-# Dumping data for table asamurat.t_admin: ~8 rows (approximately)
+# Dumping data for table asamurat.t_admin: ~13 rows (approximately)
 /*!40000 ALTER TABLE `t_admin` DISABLE KEYS */;
-INSERT INTO `t_admin` (`id`, `username`, `password`, `jabatan`, `seksi`, `nama`, `nip`, `level`, `created_date`, `deleted`) VALUES
-	(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin', '-', 'Administrator', '19900326 201401 1 002', 'Super Admin', '2017-11-06 17:02:08', '0'),
-	(2, 'umum', 'adfab9c56b8b16d6c067f8d3cff8818e', 'Pelaksana', 'Sub Bagian Umum', 'Efid Dwi Agusto', '19900326 201401 1 002', 'Umum', '2017-11-06 17:02:08', '0'),
-	(3, 'kasi2', 'e00cf25ad42683b3df678c61f42c6bda', 'Kepala Seksi', 'Seksi Perbendaharaan', 'Nur cahyo', '199003262017011001', 'Kasi', '2017-11-06 17:02:08', '0'),
-	(4, 'kk', 'dc468c70fb574ebd07287b38d0d0676d', 'Kepala Kantor', '-', 'Drs. Maulana', '1998029393838811002', 'KK', '2017-11-06 17:02:08', '0'),
-	(7, 'kasi3', 'e00cf25ad42683b3df678c61f42c6bda', 'Kepala Seksi', 'Seksi Verifikasi dan Akuntansi', 'Administrator 1', '199003262017011001', 'Kasi', '2017-11-06 17:02:08', '0'),
-	(8, 'kasi4', 'e00cf25ad42683b3df678c61f42c6bda', 'Kepala Seksi', 'Seksi Bank Giro Pos', 'Administrator 1', '199003262017011001', 'Kasi', '2017-11-06 17:02:08', '0'),
-	(9, 'kasubbag', '341ae348cafae81f3647b0de71eed9e3', 'Kasubbag Umum', 'Sub Bagian Umum', 'Kasubbag Umum', '19900326 201401 1 002', 'Kasi', '2017-11-06 17:02:08', '0'),
-	(10, 'wijanarko', '49474fbb6b0cbed7d6cc801985241634', 'Pelaksana', 'Sub Bagian Umum', 'wijanarko', '198508252006021011', 'Staf', '2017-11-06 17:02:08', '0'),
-	(11, 'efid', '1e3235258d1aa505a2572af2b7877ebf', 'Pelaksana', 'Sub Bagian Umum', 'efidd', '198508252006021002', 'Staf', '2017-11-06 17:10:33', '0');
+INSERT INTO `t_admin` (`id`, `username`, `password`, `nip`, `level`, `created_date`, `deleted`) VALUES
+	(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '198508252006021001', 'Super Admin', '2017-11-06 17:02:08', '0'),
+	(2, 'umum', 'adfab9c56b8b16d6c067f8d3cff8818e', '198508252006021002', 'Umum', '2017-11-06 17:02:08', '0'),
+	(3, 'kasi2', 'e00cf25ad42683b3df678c61f42c6bda', '198508252006021003', 'Kasi', '2017-11-06 17:02:08', '0'),
+	(4, 'kk', 'dc468c70fb574ebd07287b38d0d0676d', '198508252006021004', 'KK', '2017-11-06 17:02:08', '0'),
+	(7, 'kasi3', 'e00cf25ad42683b3df678c61f42c6bda', '198508252006021005', 'Kasi', '2017-11-06 17:02:08', '0'),
+	(8, 'kasi4', '111226c6a6cb6658833b6ad023e4d0e0', '198508252006021006', 'Kasi', '2017-11-06 17:02:08', '0'),
+	(9, 'kasubbag', '341ae348cafae81f3647b0de71eed9e3', '198508252006021007', 'Kasi', '2017-11-06 17:02:08', '0'),
+	(10, 'wijanarko', '49474fbb6b0cbed7d6cc801985241634', '198508252006021008', 'Staf', '2017-11-06 17:02:08', '0'),
+	(11, 'efid', '1e3235258d1aa505a2572af2b7877ebf', '198508252006021009', 'Staf', '2017-11-06 17:10:33', '0'),
+	(12, 'vera', '4341dfaa7259082022147afd371b69c3', '198508252006021010', 'Staf', '2017-11-07 14:33:16', '1'),
+	(13, 'vera', '4341dfaa7259082022147afd371b69c3', '198508252006021010', 'Staf', '2017-11-07 14:54:22', '0'),
+	(14, 'jamil', '0e2cc23df7e37a854499f9d918b0219d', 'jamil', 'Umum', '2017-11-07 16:07:55', '1'),
+	(15, 'jamil', '0e2cc23df7e37a854499f9d918b0219d', '198508252006021003', 'Umum', '2017-11-07 16:10:01', '0');
 /*!40000 ALTER TABLE `t_admin` ENABLE KEYS */;
 
 
@@ -112,7 +114,8 @@ INSERT INTO `t_disposisi` (`id`, `id_surat`, `kpd_yth`, `isi_disposisi`, `tgl_di
 	(7, 7, 'Sub Bagian Umum', 'Selesaikan', '2017-11-06 11:54:49', 'Biasa', '2017-11-04', '', '198508252006021009', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0'),
 	(8, 14, 'Seksi Perbendaharaan', 'masukkan', '2017-11-06 08:31:33', 'Segera', '2017-11-06', 'tidak ada catatan', '198508252006021013', '2017-11-06 09:23:19', '0000-00-00 00:00:00', '', '0'),
 	(9, 14, 'Seksi Verifikasi dan Akuntansi', 'diskusikan', '2017-11-06 08:31:35', 'Perlu Perhatian Khusus', '2017-11-06', 'belum ada', '198508252006021012', '2017-11-06 09:23:19', '0000-00-00 00:00:00', '', '0'),
-	(10, 13, 'Sub Bagian Umum', 'sa', '2017-11-06 17:12:29', 'Biasa', '2017-11-06', 'asasa', '198508252006021002', '2017-11-06 12:23:06', '2017-11-06 17:12:29', 'Sudah dibalas dengan surat tanggal xxx', '0');
+	(10, 13, 'Sub Bagian Umum', 'sa', '2017-11-06 17:12:29', 'Biasa', '2017-11-06', 'asasa', '198508252006021002', '2017-11-06 12:23:06', '2017-11-06 17:12:29', 'Sudah dibalas dengan surat tanggal xxx', '0'),
+	(11, 16, 'Sub Bagian Umum', 'Diskusikan', '2017-11-07 16:35:18', 'Biasa', '2017-11-11', '', '198508252006021008', '2017-11-07 16:33:23', '2017-11-07 16:35:18', 'Sudah disampaikan kepada Satuan Kerja', '0');
 /*!40000 ALTER TABLE `t_disposisi` ENABLE KEYS */;
 
 
@@ -190,35 +193,24 @@ CREATE TABLE IF NOT EXISTS `t_pegawai` (
   `seksi` varchar(100) NOT NULL,
   `jabatan` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `golongan` varchar(100) NOT NULL,
-  `tgl_lahir` date NOT NULL,
-  `tmp_lahir` varchar(100) NOT NULL,
-  `pendidikan` varchar(100) NOT NULL,
-  `status` varchar(100) NOT NULL,
-  `anak` varchar(100) NOT NULL,
-  `jns_kelamin` varchar(100) NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
-# Dumping data for table asamurat.t_pegawai: ~14 rows (approximately)
+# Dumping data for table asamurat.t_pegawai: ~10 rows (approximately)
 /*!40000 ALTER TABLE `t_pegawai` DISABLE KEYS */;
-INSERT INTO `t_pegawai` (`id`, `nama`, `nip`, `seksi`, `jabatan`, `email`, `golongan`, `tgl_lahir`, `tmp_lahir`, `pendidikan`, `status`, `anak`, `jns_kelamin`, `create_date`, `deleted`) VALUES
-	(2, 'Efid Dwi Agustono', '198508252006021002', '1', '2', 'efid.agustono@gmail.com', '32', '1985-08-25', 'Blitar', 'S1', 'kawin', '1', 'laki-laki', '2017-11-04 10:25:16', '0'),
-	(3, 'Anton Wibowo', '198508252006021003', '1', '2', 'dafidxxx@gmail.com', '32', '1985-08-25', 'Blitar', 'D1', 'kawin', '1', 'laki-laki', '2017-11-04 10:25:29', '0'),
-	(4, 'Susi Pujiana', '198508252006021004', '1', '2', 'efid@jalanhidup.com', '22', '1985-08-25', 'Blitar', 'SMA', 'kawin', '1', 'perempuan', '2017-11-04 10:25:38', '0'),
-	(5, 'Intan Nuraini', '198508252006021005', '2', '2', 'dafid@jalanhidup.com', '23', '1985-08-25', 'Blitar', 'S2', 'kawin', '1', 'perempuan', '2017-11-04 10:25:43', '0'),
-	(6, 'Sigit Wicaksono', '198508252006021006', '2', '2', 'blogiouss@gmail.com', '24', '1985-08-25', 'Blitar', 'S1', 'kawin', '1', 'laki-laki', '2017-11-04 10:25:54', '0'),
-	(7, 'Susi Susanti', '198508252006021007', '3', '2', '', '21', '1985-08-25', 'Blitar', 'S2', 'kawin', '1', 'perempuan', '2017-11-03 15:38:55', '0'),
-	(8, 'Dedi Kurnawan', '198508252006021008', '3', '2', '', '21', '1985-08-25', 'Blitar', 'D3', 'kawin', '1', 'laki-laki', '2017-11-03 15:39:01', '0'),
-	(9, 'Fathir Hidayat', '198508252006021009', '4', '2', '', '32', '1985-08-25', 'Blitar', 'D4', 'kawin', '1', 'laki-laki', '2017-11-03 15:39:05', '0'),
-	(10, 'Eko Sudono', '198508252006021010', '4', '2', '', '33', '1985-08-25', 'Blitar', 'S1', 'kawin', '1', 'laki-laki', '2017-11-03 10:17:23', '0'),
-	(11, 'Vera Zunawati', '198508252006021011', '1', '1', '', '33', '1985-08-25', 'Blitar', 'SMA', 'kawin', '1', 'laki-laki', '2017-11-06 08:30:40', '0'),
-	(12, 'Denny Mailizon', '198508252006021012', '2', '1', '', '34', '1985-08-25', 'Blitar', 'S1', 'kawin', '1', 'laki-laki', '2017-11-06 08:30:42', '0'),
-	(13, 'Sukarso', '198508252006021013', '3', '1', '', '34', '1985-08-25', 'Blitar', 'SMA', 'kawin', '1', 'laki-laki', '2017-11-06 08:30:44', '0'),
-	(14, 'Rosiyah', '198508252006021014', '4', '1', '', '33', '1985-08-25', 'Blitar', 'S1', 'kawin', '1', 'laki-laki', '2017-11-06 08:30:46', '0'),
-	(15, 'Kaulan', '198508252006021015', '0', '0', '', '41', '1985-08-25', 'Blitar', 'SMA', 'kawin', '1', 'laki-laki', '2017-11-06 08:30:48', '0');
+INSERT INTO `t_pegawai` (`id`, `nama`, `nip`, `seksi`, `jabatan`, `email`, `create_date`, `deleted`) VALUES
+	(2, 'Efid Dwi Agustono', '198508252006021001', 'Sub Bagian Umum', 'Pelaksana', 'efid.agustono@gmail.com', '2017-11-07 15:11:06', '0'),
+	(3, 'Anton Wibowo', '198508252006021002', 'Sub Bagian Umum', 'Pelaksana', 'dafidxxx@gmail.com', '2017-11-07 15:11:15', '0'),
+	(4, 'Susi Pujiana', '198508252006021003', 'Seksi Perbendaharaan', 'Kepala Seksi', 'efid@jalanhidup.com', '2017-11-07 15:11:22', '0'),
+	(5, 'Intan Nuraini', '198508252006021004', 'Kepala Kantor', 'Kepala Kantor', 'dafid@jalanhidup.com', '2017-11-07 15:11:42', '0'),
+	(6, 'Sigit Wicaksono', '198508252006021005', 'Seksi Verifikasi dan Akuntansi', 'Kepala Seksi', 'blogiouss@gmail.com', '2017-11-07 15:12:10', '0'),
+	(7, 'Susi Susanti', '198508252006021006', 'Seksi Bank Giro Pos', 'Kepala Seksi', '', '2017-11-07 15:12:12', '0'),
+	(8, 'Dedi Kurnawan', '198508252006021007', 'Sub Bagian Umum', 'Kasubbag Umum', '', '2017-11-07 15:12:23', '0'),
+	(9, 'Fathir Hidayat', '198508252006021008', 'Sub Bagian Umum', 'Pelaksana', '', '2017-11-07 15:12:28', '0'),
+	(10, 'Eko Sudono', '198508252006021009', 'Sub Bagian Umum', 'Pelaksana', '', '2017-11-07 15:12:29', '0'),
+	(11, 'Vera Zunawati', '198508252006021010', 'Seksi Verifikasi dan Akuntansi', 'Pelaksana', '', '2017-11-07 15:09:59', '0');
 /*!40000 ALTER TABLE `t_pegawai` ENABLE KEYS */;
 
 
@@ -245,49 +237,36 @@ INSERT INTO `t_seksi` (`id`, `kd_seksi`, `nm_seksi`) VALUES
 CREATE TABLE IF NOT EXISTS `t_surat_keluar` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `kode` varchar(20) NOT NULL,
-  `no_agenda` varchar(7) NOT NULL,
+  `no_surat1` varchar(7) NOT NULL,
+  `no_surat2` varchar(100) NOT NULL,
   `isi_ringkas` mediumtext NOT NULL,
   `tujuan` varchar(250) NOT NULL,
-  `no_surat` varchar(100) NOT NULL,
   `tgl_surat` date NOT NULL,
   `tgl_catat` date NOT NULL,
   `keterangan` varchar(200) NOT NULL,
   `file` varchar(200) NOT NULL,
+  `seksi` varchar(200) NOT NULL,
+  `nip` varchar(200) NOT NULL,
   `pengolah` int(11) NOT NULL,
   `deleted` int(11) NOT NULL DEFAULT '0',
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
-# Dumping data for table asamurat.t_surat_keluar: ~7 rows (approximately)
+# Dumping data for table asamurat.t_surat_keluar: ~9 rows (approximately)
 /*!40000 ALTER TABLE `t_surat_keluar` DISABLE KEYS */;
-INSERT INTO `t_surat_keluar` (`id`, `kode`, `no_agenda`, `isi_ringkas`, `tujuan`, `no_surat`, `tgl_surat`, `tgl_catat`, `keterangan`, `file`, `pengolah`, `deleted`, `created_date`) VALUES
-	(1, 'HM', '0001', 'Permintaan data masjid bersejarah di Kota Yogyakarta', 'Kantor Kemenag Kota Yogyakartas', '800/1221', '2015-05-24', '2015-05-24', '', '', 1, 0, '2017-11-02 20:38:24'),
-	(2, 'KU.02.1', '0002', 'Dinas', 'KPPN Padang', '0920', '2017-11-01', '2017-11-01', 'Kunjungan Kerja', 'tahap1.jpg', 2, 0, '2017-11-02 20:38:24'),
-	(3, 'KU.02.1', '0003', 'Dinas', 'Kandepag', '0920', '2017-11-01', '2017-11-01', 'Kunjungan Kerja', 'tahap1.jpg', 2, 0, '2017-11-02 20:38:24'),
-	(4, '12', '0004', 'Dinas', 'Kandepag', '0920', '2017-11-01', '2017-11-01', 'Kunjungan Kerja', 'tahap1.jpg', 2, 0, '2017-11-02 20:38:24'),
-	(5, '12', '0005', '12312', 'PT A', '123', '2017-11-02', '2017-11-02', '', '', 2, 0, '0000-00-00 00:00:00'),
-	(6, '11', '0006', '13', 'Dinas Pariwisata DIY', '2', '2017-11-01', '2017-11-02', '', 'favicon1.png', 2, 0, '0000-00-00 00:00:00'),
-	(7, '12', '0007', 'd', 'Dinas PAriwisata Jakarta', 'a', '2017-11-02', '2017-11-02', '', '', 2, 0, '0000-00-00 00:00:00');
+INSERT INTO `t_surat_keluar` (`id`, `kode`, `no_surat1`, `no_surat2`, `isi_ringkas`, `tujuan`, `tgl_surat`, `tgl_catat`, `keterangan`, `file`, `seksi`, `nip`, `pengolah`, `deleted`, `created_date`) VALUES
+	(1, '12', '0001', 'WPB.15/KP.01/2017', 'Permintaan data masjid bersejarah di Kota Yogyakarta', 'Kantor Kemenag Kota Yogyakartas', '2015-05-24', '2015-05-24', '', '', 'Seksi Perbendaharaan', '', 1, 0, '2017-11-02 20:38:24'),
+	(2, '12', '0002', 'WPB.15/KP.01/2017', 'Undangan Sosialisasi Aplikasi SAS', 'KPPN Padang', '2017-11-01', '2017-11-01', 'Kunjungan Kerja', 'tahap1.jpg', 'Sub Bagian Umum', '', 2, 0, '2017-11-02 20:38:24'),
+	(3, '11', '0003', 'WPB.15/KP.01/2017', 'Surat Tugas Pemantauan Dana Desa', 'Kandepag', '2017-11-01', '2017-11-01', 'Kunjungan Kerja', 'tahap1.jpg', 'Sub Bagian Umum', '198508252006021011', 2, 0, '2017-11-02 20:38:24'),
+	(4, '12', '0004', 'WPB.15/KP.01/2017', 'Pemberitahuan Pemanfaatan Fasilitas', 'Kandepag', '2017-11-01', '2017-11-01', 'Kunjungan Kerja', 'tahap1.jpg', 'Sub Bagian Umum', '', 2, 0, '2017-11-02 20:38:24'),
+	(5, '12', '0005', 'WPB.15/KP.01/2017', 'Surat Tugas Pemantauan Proyek', 'PT A', '2017-11-02', '2017-11-02', '', '', 'Seksi Bank Giro Pos', '', 2, 0, '0000-00-00 00:00:00'),
+	(6, '11', '0006', 'WPB.15/KP.01/2017', 'Undangan Sosialisasi Aplikasi OMSPAN', 'Dinas Pariwisata DIY', '2017-11-01', '2017-11-02', '', 'favicon1.png', 'Seksi Verifikasi dan Akuntansi', '', 2, 0, '0000-00-00 00:00:00'),
+	(7, '12', '0007', 'WPB.15/KP.01/2017', 'Penyampaian langkah-langkah akhir tahun', 'Dinas PAriwisata Jakarta', '2017-11-02', '2017-11-02', '', 'tahap1v1.jpg', '', '', 2, 0, '0000-00-00 00:00:00'),
+	(8, '11', '0008', 'WPB.15/KP.01/2017', 'sdfsdf', 'Dinas Pariwisata DI Yogyakarta', '2017-11-07', '2017-11-07', 'd', '', 'Sub Bagian Umum', '198508252006021011', 10, 0, '2017-11-07 11:03:38'),
+	(9, '11', '0009', 'WPB.15/KP.01/2017', 'sadas', 'Dinas Pariwisata DI Yogyakarta', '2017-11-07', '2017-11-07', 'asdas', '', 'Sub Bagian Umum', '198508252006021011', 10, 0, '2017-11-07 11:11:58'),
+	(10, '12', '0010', 'WPB.15/KP.01/2017', 'Permintaan Penataan Jaringan', 'Kantor Pusat DJPBN', '2017-11-05', '2017-11-07', '', 'tahap11.jpg', 'Sub Bagian Umum', '198508252006021008', 10, 0, '2017-11-07 16:24:53');
 /*!40000 ALTER TABLE `t_surat_keluar` ENABLE KEYS */;
-
-
-# Dumping structure for table asamurat.t_surat_keputusan
-CREATE TABLE IF NOT EXISTS `t_surat_keputusan` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
-  `nomor` varchar(20) NOT NULL,
-  `tahun` varchar(7) NOT NULL,
-  `tentang` mediumtext NOT NULL,
-  `tgl_surat` date NOT NULL,
-  `keterangan` varchar(200) NOT NULL,
-  `file` varchar(200) NOT NULL,
-  `pengolah` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-# Dumping data for table asamurat.t_surat_keputusan: ~0 rows (approximately)
-/*!40000 ALTER TABLE `t_surat_keputusan` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_surat_keputusan` ENABLE KEYS */;
 
 
 # Dumping structure for table asamurat.t_surat_masuk
@@ -307,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `t_surat_masuk` (
   `deleted` int(4) NOT NULL DEFAULT '0',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 # Dumping data for table asamurat.t_surat_masuk: ~14 rows (approximately)
 /*!40000 ALTER TABLE `t_surat_masuk` DISABLE KEYS */;
@@ -325,7 +304,8 @@ INSERT INTO `t_surat_masuk` (`id`, `kode`, `no_agenda`, `indek_berkas`, `isi_rin
 	(12, '12', '0011', '', 'sfdwedwed', 'Dinas Pariwisata DIY', '21', '2017-11-02', '2017-11-04', '', 'tahap1v1.jpg', 2, 0, '0000-00-00 00:00:00'),
 	(13, '11', '0012', '', 'asffadsd', 'Dinas Pariwisata DI Yogyakarta', 'S-004/PB.15/2017', '2017-11-03', '2017-11-04', '', 'tahap13.jpg', 2, 0, '0000-00-00 00:00:00'),
 	(14, '11', '0013', '', 'Surat Permintaan Nara Sumber Pelatihan Aplikasi', 'Dinas Pariwisata DIY', 'wqwq', '2017-11-02', '2017-11-04', '', 'tahap1v2.jpg', 2, 0, '0000-00-00 00:00:00'),
-	(15, '15', '0014', '', 'Permintaan Nara Sumber', 'Dinas Tenaga Kerja Manna', '119/PB.02/2017', '2017-10-03', '2017-11-06', '', 'tahap1v3.jpg', 2, 0, '0000-00-00 00:00:00');
+	(15, '15', '0014', '', 'Permintaan Nara Sumber', 'Dinas Tenaga Kerja Manna', '119/PB.02/2017', '2017-10-03', '2017-11-06', '', 'tahap1v3.jpg', 2, 0, '0000-00-00 00:00:00'),
+	(16, '12', '0015', '', 'Pemberitahuan Maintenance OMSPAN', 'Kantor Pusat Dirjen Perbendaharaan', 'S-001/WPB.15/2017', '2017-11-05', '2017-11-07', '', 'cc_danamon2.pdf', 2, 0, '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `t_surat_masuk` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
