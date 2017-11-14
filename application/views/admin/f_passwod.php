@@ -2,7 +2,7 @@
 	<div class="navbar navbar-inverse">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Rubah Password</a>
+				<a class="navbar-brand" href="#" style="color:white">Ubah Password</a>
 			</div>
 		</div><!-- /.container -->
 	</div><!-- /.navbar -->

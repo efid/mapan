@@ -18,6 +18,61 @@
 	<?php 
 	  $ta = $this->session->userdata('admin_ta');
 	?>
+	
+	
+	<?php 
+	$suratmasuk	= $this->db->query("select month(tgl_surat) month,count(no_surat) value from t_surat_masuk group by month")->result();
+	// var_dump($suratmasuk);die;
+	?>
+	<?php 
+	$suratkeluar	= $this->db->query("select month(tgl_surat) month,count(no_surat1) value from t_surat_keluar group by month")->result();
+	// var_dump($suratmasuk);die;
+	?>
+
+<?php 
+	$subbagumum	= $this->db->query("select  'TepatWaktu' label, count(id_surat) value from t_disposisi where date(tgl_selesai) <= batas_waktu and kpd_yth='Sub Bagian Umum'
+		union all
+		select 'Terlambat' label, count(id_surat) value from t_disposisi where date(tgl_selesai) > batas_waktu and kpd_yth='Sub Bagian Umum' 
+		union all
+		select 'Proses' label, count(id_surat) value from t_disposisi where date(tgl_selesai) = '0000-00-00' and kpd_yth='Sub Bagian Umum' ")->result();
+	// var_dump($subbagumum);die;
+	?>
+
+<?php 
+	$vera	= $this->db->query("select  'TepatWaktu' label, count(id_surat) value from t_disposisi where date(tgl_selesai) <= batas_waktu and kpd_yth='Seksi Verifikasi dan Akuntansi'
+		union all
+		select 'Terlambat' label, count(id_surat) value from t_disposisi where date(tgl_selesai) > batas_waktu and kpd_yth='Seksi Verifikasi dan Akuntansi' 
+		union all
+		select 'Proses' label, count(id_surat) value from t_disposisi where date(tgl_selesai) = '0000-00-00' and kpd_yth='Seksi Verifikasi dan Akuntansi' ")->result();
+	// var_dump($subbagumum);die;
+	?>
+
+	
+<?php 
+	$perben	= $this->db->query("select  'TepatWaktu' label, count(id_surat) value from t_disposisi where date(tgl_selesai) <= batas_waktu and kpd_yth='Seksi Perbendaharaan'
+		union all
+		select 'Terlambat' label, count(id_surat) value from t_disposisi where date(tgl_selesai) > batas_waktu and kpd_yth='Seksi Perbendaharaan' 
+		union all
+		select 'Proses' label, count(id_surat) value from t_disposisi where date(tgl_selesai) = '0000-00-00' and kpd_yth='Seksi Perbendaharaan' ")->result();
+	// var_dump($subbagumum);die;
+	?>
+
+<?php 
+	$bank	= $this->db->query("select  'TepatWaktu' label, count(id_surat) value from t_disposisi where date(tgl_selesai) <= batas_waktu and kpd_yth='Seksi Bank Giro Pos'
+		union all
+		select 'Terlambat' label, count(id_surat) value from t_disposisi where date(tgl_selesai) > batas_waktu and kpd_yth='Seksi Bank Giro Pos' 
+		union all
+		select 'Proses' label, count(id_surat) value from t_disposisi where date(tgl_selesai) = '0000-00-00' and kpd_yth='Seksi Bank Giro Pos' ")->result();
+	// var_dump($subbagumum);die;
+	?>
+
+
+
+	
+	
+	
+	
+	
 	<?php 
 	$klr	= $this->db->query("SELECT COUNT(no_surat1) as jml FROM t_surat_keluar WHERE deleted=0 and  YEAR(TGL_SURAT)='$ta'")->row();
 	?>
@@ -84,19 +139,51 @@
                 <a href="<?php echo base_url(); ?>index.php/admin/surat_masuk_disp" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
+			<div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3><?php echo $dispkasi->jml; ?></h3>
-                  <p>Belum Disposisi Kasi</p>
+                  <h3><?php echo $disp->jml; ?></h3>
+                  <p>Dalam Proses</p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-folder-o"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>index.php/admin/surat_masuk" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>index.php/admin/surat_masuk_disp" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
+			
+			
+            <div class="col-lg-3">
+			<h4 class="box-title">Sub Bagian Umum</h4>
+			<!-- small box -->
+              <div class="small-box">
+				<div id="donut-example1"></div>
+              </div>
+			  </div><!-- ./col -->
+            
+			<div class="col-lg-3">
+			<h4 class="box-title">Seksi Perbendaharaan</h4>
+              <!-- small box -->
+              <div class="small-box">
+				<div id="donut-example2"></div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3">
+			<h4 class="box-title">Seksi Verifikasi dan Akuntansi</h4>
+              <!-- small box -->
+              <div class="small-box">
+				<div id="donut-example3"></div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+			<h4 class="box-title">Seksi Bank Giro Pos</h4>
+              <!-- small box -->
+              <div class="small-box">
+				<div id="donut-example4"></div>
+              </div>
+            </div><!-- ./col -->
+            
 			
 			
            <section class="col-lg-6 col-sm-1 connectedSortable">
@@ -108,9 +195,22 @@
 				<span class="pull-left header"><i class="fa fa-inbox"></i> Surat Keluar</span>
 				<div id="keluar"></div>
 			</section>
+		
+			<section class="col-lg-12 col-sm-1 connectedSortable">
+				<span class="pull-left header"><i class="fa fa-inbox"></i> Grafik Surat Masuk</span>
+				<div id="bar-masuk"></div>
+			</section>
+			
+			<section class="col-lg-12 col-sm-1 connectedSortable">
+				<span class="pull-left header"><i class="fa fa-inbox"></i> Grafik Surat Keluar</span>
+				<div id="bar-keluar"></div>
+			</section>
 			
 		</div>
 
+		
+		
+		
 <script>
 // Menggunakan Morris.Line
 Morris.Line({
@@ -119,20 +219,9 @@ Morris.Line({
 element: 'masuk',
  
 // Data dari chart yang akan ditampilkan
-data: [
-{ year: '2010', value: 20 },
-{ year: '2011', value: 10 },
-{ year: '2012', value: 15},
-{ year: '2013', value: 15},
-{ year: '2014', value: 10},
-{ year: '2015', value: 15},
-{ year: '2016', value: 20},
-{ year: '2017', value: 10},
-{ year: '2018', value: 10}
- 
-],
+data: <?php echo json_encode($suratmasuk); ?>,
 // Sumbu X
-xkey: 'year',
+xkey: 'month',
  
 // Sumbu Y
 ykeys: ['value'],
@@ -151,20 +240,9 @@ Morris.Line({
 element: 'keluar',
 lineColors: ['#D58665'],
 // Data dari chart yang akan ditampilkan
-data: [
-{ year: '2010', value: 30 },
-{ year: '2011', value: 20 },
-{ year: '2012', value: 15},
-{ year: '2013', value: 25},
-{ year: '2014', value: 20},
-{ year: '2015', value: 25},
-{ year: '2016', value: 10},
-{ year: '2017', value: 20},
-{ year: '2018', value: 30}
- 
-],
+data: <?php echo json_encode($suratkeluar); ?>,
 // Sumbu X
-xkey: 'year',
+xkey: 'month',
  
 // Sumbu Y
 ykeys: ['value'],
@@ -173,3 +251,77 @@ ykeys: ['value'],
 labels: ['Value']
 });
 </script>		
+
+
+<script>
+Morris.Bar({
+  element: 'bar-masuk',
+  data: [
+    { y: 'jan', a: 100, b: 90, c:50,d:20 },
+    { y: 'peb', a: 75,  b: 65, c:50,d:20  },
+    { y: 'mar', a: 50,  b: 40, c:50,d:20  },
+    { y: 'apr', a: 75,  b: 65, c:50,d:20  },
+    { y: 'mei', a: 50,  b: 40, c:50,d:20  },
+    { y: 'jun', a: 75,  b: 65, c:50,d:20  },
+    { y: 'jul', a: 100, b: 90, c:50,d:20  },
+    { y: 'ags', a: 100, b: 90, c:50,d:20  },
+    { y: 'sep', a: 100, b: 90, c:50,d:20  },
+    { y: 'okt', a: 100, b: 90, c:50,d:20  },
+  ],
+  xkey: 'y',
+  ykeys: ['a', 'b','c','d'],
+  labels: ['Sub Bag Umum', 'Seksi Vera','Seksi Bank Giro Pos','Seksi Perbendaharaan']
+});
+</script>
+
+<script>
+Morris.Bar({
+  element: 'bar-keluar',
+  data: [
+    { y: 'jan', a: 100, b: 90, c:50,d:20 },
+    { y: 'peb', a: 75,  b: 65, c:50,d:20  },
+    { y: 'mar', a: 50,  b: 40, c:50,d:20  },
+    { y: 'apr', a: 75,  b: 65, c:50,d:20  },
+    { y: 'mei', a: 50,  b: 40, c:50,d:20  },
+    { y: 'jun', a: 75,  b: 65, c:50,d:20  },
+    { y: 'jul', a: 100, b: 90, c:50,d:20  },
+    { y: 'ags', a: 100, b: 90, c:50,d:20  },
+    { y: 'sep', a: 100, b: 90, c:50,d:20  },
+    { y: 'okt', a: 100, b: 90, c:50,d:20  },
+  ],
+  xkey: 'y',
+  ykeys: ['a', 'b','c','d'],
+  labels: ['Sub Bag Umum', 'Seksi Vera','Seksi Bank Giro Pos','Seksi Perbendaharaan']
+});
+</script>
+
+<script>
+Morris.Donut({
+  element: 'donut-example1',
+  colors: ["#00a65a", "#f56954", "#3c8dbc"],  
+  data: <?php echo json_encode($subbagumum); ?>
+});
+</script>
+
+<script>
+Morris.Donut({
+  element: 'donut-example2',
+  colors: ["#00a65a", "#f56954", "#3c8dbc"],
+  data: <?php echo json_encode($perben); ?>
+});
+</script>
+<script>
+Morris.Donut({
+  element: 'donut-example3',
+  colors: ["#00a65a", "#f56954", "#3c8dbc"],
+  data: <?php echo json_encode($vera); ?>
+});
+</script>
+
+<script>
+Morris.Donut({
+  element: 'donut-example4',
+  colors: ["#00a65a", "#f56954", "#3c8dbc"],
+  data: <?php echo json_encode($bank); ?>
+});
+</script>

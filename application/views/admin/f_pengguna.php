@@ -1,7 +1,7 @@
 <div class="navbar navbar-inverse">
 	<div class="container">
 		<div class="navbar-header">
-			<span class="navbar-brand" href="#">Edit Instansi Pengguna</span>
+			<span class="navbar-brand" style="color:white" href="#">Kelola Instansi Pengguna</span>
 		</div>
 	</div><!-- /.container -->
 </div><!-- /.navbar -->
@@ -13,7 +13,7 @@
 	
 	<div class="col-lg-6">
 		<table width="100%" class="table-form">
-		<tr><td width="20%">Nama</td><td><b><input type="text" name="nama" required value="<?php echo $data->nama; ?>" style="width: 400px" class="form-control"></b></td></tr>
+		<tr><td width="20%">Nama Instansi</td><td><b><input type="text" name="nama" required value="<?php echo $data->nama; ?>" style="width: 400px" class="form-control"></b></td></tr>
 		<tr><td width="20%">Alamat Instansi</td><td><b><textarea name="alamat" required style="width: 400px; height: 90px" class="form-control"><?php echo $data->alamat; ?></textarea></b></td></tr>	
 		<tr><td colspan="2">
 		<br><button type="submit" class="btn btn-primary"><i class="icon icon-ok icon-white"></i> Simpan</button>

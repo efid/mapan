@@ -260,7 +260,7 @@
 			<li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="icon-wrench icon-white"> </i> <span style="color:white">Setting </span><span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
-                <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/pengguna">Instansi Pengguna</a></li>
+                <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/pengguna">Kelola Instansi Pengguna</a></li>
                 <li><a tabindex="-1" href="<?php echo base_url(); ?>index.php/admin/manage_admin">Manajemen User</a></li>
               </ul>
             </li>
@@ -295,7 +295,7 @@
           <div class="" style="padding: 15px 15px 5px 15px;">
 			<div class="well well-sm bg-blue" color:white>
 				<img src="<?php echo base_url(); ?>upload/<?php echo $q_instansi->logo; ?>" class="thumbnail span3" style="display: inline; float: left; margin-right: 20px; margin-top: 10px; width: 100px; height: 100px">
-                <h2 style="margin: 15px 0 10px 0; color: white;"><?php echo $q_instansi->nama; ?></h2>
+                <h2 style="margin: 15px 0 10px 0; color: white; font-family:  Times New Roman"><?php echo $q_instansi->nama; ?></h2>
                 <div style="color: white; font-size: 14px; font-family: Tahoma" class="clearfix"><b>Alamat : <?php echo $q_instansi->alamat; ?></b></div>
              </div>
           </div>
@@ -307,8 +307,8 @@
 
 
 	
-	  <div class="span12 well well-sm bg-blue" style="color:white">
-		<h4 style="color:white">MAPAN - Manajemen Persuratan</h4>
+	  <div class="span12 well well-sm bg-blue" style="color:white ; font-family:Verdana">
+		<strong><h4 style="color:white">MAPAN - Manajemen Persuratan</h4></strong>
 	  </div>
  
     </div>

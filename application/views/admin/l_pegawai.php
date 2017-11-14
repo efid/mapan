@@ -1,3 +1,23 @@
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+
+
 <div class="clearfix">
 <div class="row">
   <div class="col-lg-12">
@@ -40,11 +60,12 @@
 	<thead>
 		<tr>
 			<th width="5%">Nomor</th>
-			<th width="25%">Nama</th>
-			<th width="25%">NIP</th>
-			<th width="25%">Seksi</th>
-			<th width="20%">jabatan</th>
-			<th width="20%">Email</th>
+			<th width="15%">Nama</th>
+			<th width="15%">NIP</th>
+			<th width="20%">Seksi</th>
+			<th width="15%">jabatan</th>
+			<th width="15%">Email</th>
+			<th width="15%">Aksi</th>
 			
 		</tr>
 	</thead>

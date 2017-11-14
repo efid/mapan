@@ -34,7 +34,7 @@ if ($mode == "edt" || $mode == "act_edt") {
 <div class="navbar navbar-inverse">
 	<div class="container">
 		<div class="navbar-header">
-			<span class="navbar-brand" href="#">Disposisi Surat</span>
+			<span class="navbar-brand" href="#" style="color:white">Disposisi Surat</span>
 		</div>
 	</div><!-- /.container -->
 </div><!-- /.navbar -->

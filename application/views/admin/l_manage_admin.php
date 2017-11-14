@@ -1,3 +1,23 @@
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+
+
 <div class="clearfix">
 <div class="row">
   <div class="col-lg-12">
@@ -30,7 +50,8 @@
 <table class="table table-bordered table-hover">
 	<thead>
 		<tr>
-			<th width="5%">No</th>
+			<th  
+				width="5%">No</th>
 			<th width="15%">Username</th>
 			<th width="17%">Nama, NIP</th>
 			<th width="18%">Jabatan</th>

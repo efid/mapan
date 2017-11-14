@@ -1,3 +1,24 @@
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+
+
+
 <div class="clearfix">
 <div class="row">
   <div class="col-lg-12">
@@ -52,10 +73,10 @@
 			<th width="10%">Surat</th>
 			<th width="15%">Isi Ringkas, File</th>
 			<th width="15%">Asal Surat</th>
-			<th width="15%">Nomor, Tgl. Surat</th>
+			<th width="15%">Nomor dan Tgl. Surat</th>
 			<th width="7%">Disp KK</th>
 			<th width="7%">Disp Kasi</th>
-			<th width="7%">Tindak Lanjut</th>
+			<th width="7%">Pelaksana</th>
 			<th width="15%">Aksi</th>
 		</tr>
 	</thead>

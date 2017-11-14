@@ -1,0 +1,33 @@
+<html>
+<head>
+<title> Tutorial Morris Bag.1 </title>
+<link rel="stylesheet" href="morris.css">
+<script src="jquery.min.js"></script>
+<script src="raphael-min.js"></script>
+<script src="morris.min.js"></script>
+</head>
+<body>
+<div id="bar-example"></div>
+<script>
+Morris.Bar({
+  element: 'bar-example',
+  data: [
+    { y: 'jan', a: 100, b: 90, c:50,d:20 },
+    { y: 'peb', a: 75,  b: 65, c:50,d:20  },
+    { y: 'mar', a: 50,  b: 40, c:50,d:20  },
+    { y: 'apr', a: 75,  b: 65, c:50,d:20  },
+    { y: 'mei', a: 50,  b: 40, c:50,d:20  },
+    { y: 'jun', a: 75,  b: 65, c:50,d:20  },
+    { y: 'jul', a: 100, b: 90, c:50,d:20  },
+    { y: 'ags', a: 100, b: 90, c:50,d:20  },
+    { y: 'sep', a: 100, b: 90, c:50,d:20  },
+    { y: 'okt', a: 100, b: 90, c:50,d:20  },
+  ],
+  xkey: 'y',
+  ykeys: ['a', 'b','c','d'],
+  labels: ['Sub Bag Umum', 'Seksi Vera','Seksi Bank Giro Pos','Seksi Perbendaharaan']
+});
+
+</script>
+</body>
+</html>

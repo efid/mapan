@@ -1,5 +1,8 @@
 <?php
 
+$nama  = "Efid dwi Agustono";
+$alamat = "ksgr D2 No.3";
+$telepon = "0812321321";
 
 include "email/class.phpmailer.php";
 
@@ -33,8 +36,10 @@ Sistem Telah Menerima Pemesanan Dari input user dengan data sebagai berikut :   
 $mail = new PHPMailer;
 $mail->IsSMTP();
 $mail->SMTPSecure = 'ssl';
-$mail->Host = "smtp.gmail.com"; //host masing2 provider email
-$mail->SMTPDebug = 2;
+$mail->Host = gethostbyname('smtp.gmail.com');
+// $mail->Host = "smtp.gmail.com"; //host masing2 provider email
+
+$mail->SMTPDebug = 0;
 $mail->Port = 465;
 $mail->SMTPAuth = true;
 $mail->Username = "blogiouss@gmail.com"; //user email yang sebelumnya anda buat
