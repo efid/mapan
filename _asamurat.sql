@@ -3,7 +3,7 @@
 # Server version:               5.6.20
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3603
-# Date/time:                    2017-11-07 16:37:52
+# Date/time:                    2017-11-14 07:43:52
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `t_admin` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
-# Dumping data for table asamurat.t_admin: ~13 rows (approximately)
+# Dumping data for table asamurat.t_admin: ~11 rows (approximately)
 /*!40000 ALTER TABLE `t_admin` DISABLE KEYS */;
 INSERT INTO `t_admin` (`id`, `username`, `password`, `nip`, `level`, `created_date`, `deleted`) VALUES
 	(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '198508252006021001', 'Super Admin', '2017-11-06 17:02:08', '0'),
@@ -100,12 +100,12 @@ CREATE TABLE IF NOT EXISTS `t_disposisi` (
   `selesai` varchar(250) NOT NULL,
   `deleted` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 # Dumping data for table asamurat.t_disposisi: ~9 rows (approximately)
 /*!40000 ALTER TABLE `t_disposisi` DISABLE KEYS */;
 INSERT INTO `t_disposisi` (`id`, `id_surat`, `kpd_yth`, `isi_disposisi`, `tgl_disposisi1`, `sifat`, `batas_waktu`, `catatan`, `nip_pelaksana`, `tgl_disposisi2`, `tgl_selesai`, `selesai`, `deleted`) VALUES
-	(1, 1, 'Seksi Verifikasi dan Akuntansi', 'ditindaklanjuti', '2017-11-06 14:49:33', 'Biasa', '2015-05-27', '', '198508252006021011', '0000-00-00 00:00:00', '2017-11-06 14:49:33', 'dedede', '0'),
+	(1, 1, 'Seksi Verifikasi dan Akuntansi', 'ditindaklanjuti', '2017-11-13 14:19:50', 'Biasa', '2017-11-13', '', '198508252006021011', '0000-00-00 00:00:00', '2017-11-06 14:49:33', 'dedede', '0'),
 	(2, 2, 'Seksi Perbendaharaan', 'Selesaikan', '2017-11-06 10:39:49', 'Biasa', '2017-11-02', '', '198508252006021012', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0'),
 	(3, 2, 'Seksi Perbendaharaan', 'Selesaikan', '2017-11-06 10:39:45', 'Biasa', '2017-11-03', '', '198508252006021011', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0'),
 	(4, 3, 'Seksi Perbendaharaan', 'Segera Rapatkan', '0000-00-00 00:00:00', 'Segera', '2017-11-02', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0'),
@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `t_pegawai` (
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 # Dumping data for table asamurat.t_pegawai: ~10 rows (approximately)
 /*!40000 ALTER TABLE `t_pegawai` DISABLE KEYS */;
@@ -251,21 +251,21 @@ CREATE TABLE IF NOT EXISTS `t_surat_keluar` (
   `deleted` int(11) NOT NULL DEFAULT '0',
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 # Dumping data for table asamurat.t_surat_keluar: ~9 rows (approximately)
 /*!40000 ALTER TABLE `t_surat_keluar` DISABLE KEYS */;
 INSERT INTO `t_surat_keluar` (`id`, `kode`, `no_surat1`, `no_surat2`, `isi_ringkas`, `tujuan`, `tgl_surat`, `tgl_catat`, `keterangan`, `file`, `seksi`, `nip`, `pengolah`, `deleted`, `created_date`) VALUES
-	(1, '12', '0001', 'WPB.15/KP.01/2017', 'Permintaan data masjid bersejarah di Kota Yogyakarta', 'Kantor Kemenag Kota Yogyakartas', '2015-05-24', '2015-05-24', '', '', 'Seksi Perbendaharaan', '', 1, 0, '2017-11-02 20:38:24'),
-	(2, '12', '0002', 'WPB.15/KP.01/2017', 'Undangan Sosialisasi Aplikasi SAS', 'KPPN Padang', '2017-11-01', '2017-11-01', 'Kunjungan Kerja', 'tahap1.jpg', 'Sub Bagian Umum', '', 2, 0, '2017-11-02 20:38:24'),
-	(3, '11', '0003', 'WPB.15/KP.01/2017', 'Surat Tugas Pemantauan Dana Desa', 'Kandepag', '2017-11-01', '2017-11-01', 'Kunjungan Kerja', 'tahap1.jpg', 'Sub Bagian Umum', '198508252006021011', 2, 0, '2017-11-02 20:38:24'),
-	(4, '12', '0004', 'WPB.15/KP.01/2017', 'Pemberitahuan Pemanfaatan Fasilitas', 'Kandepag', '2017-11-01', '2017-11-01', 'Kunjungan Kerja', 'tahap1.jpg', 'Sub Bagian Umum', '', 2, 0, '2017-11-02 20:38:24'),
-	(5, '12', '0005', 'WPB.15/KP.01/2017', 'Surat Tugas Pemantauan Proyek', 'PT A', '2017-11-02', '2017-11-02', '', '', 'Seksi Bank Giro Pos', '', 2, 0, '0000-00-00 00:00:00'),
-	(6, '11', '0006', 'WPB.15/KP.01/2017', 'Undangan Sosialisasi Aplikasi OMSPAN', 'Dinas Pariwisata DIY', '2017-11-01', '2017-11-02', '', 'favicon1.png', 'Seksi Verifikasi dan Akuntansi', '', 2, 0, '0000-00-00 00:00:00'),
-	(7, '12', '0007', 'WPB.15/KP.01/2017', 'Penyampaian langkah-langkah akhir tahun', 'Dinas PAriwisata Jakarta', '2017-11-02', '2017-11-02', '', 'tahap1v1.jpg', '', '', 2, 0, '0000-00-00 00:00:00'),
-	(8, '11', '0008', 'WPB.15/KP.01/2017', 'sdfsdf', 'Dinas Pariwisata DI Yogyakarta', '2017-11-07', '2017-11-07', 'd', '', 'Sub Bagian Umum', '198508252006021011', 10, 0, '2017-11-07 11:03:38'),
-	(9, '11', '0009', 'WPB.15/KP.01/2017', 'sadas', 'Dinas Pariwisata DI Yogyakarta', '2017-11-07', '2017-11-07', 'asdas', '', 'Sub Bagian Umum', '198508252006021011', 10, 0, '2017-11-07 11:11:58'),
-	(10, '12', '0010', 'WPB.15/KP.01/2017', 'Permintaan Penataan Jaringan', 'Kantor Pusat DJPBN', '2017-11-05', '2017-11-07', '', 'tahap11.jpg', 'Sub Bagian Umum', '198508252006021008', 10, 0, '2017-11-07 16:24:53');
+	(1, '12', '0001', 'WPB.15/KP.01/2017', 'Permintaan data masjid bersejarah di Kota Yogyakarta', 'Kantor Kemenag Kota Yogyakartas', '2017-01-24', '2015-05-24', '', '', 'Seksi Perbendaharaan', '', 1, 0, '2017-11-02 20:38:24'),
+	(2, '12', '0002', 'WPB.15/KP.01/2017', 'Undangan Sosialisasi Aplikasi SAS', 'KPPN Padang', '2017-02-01', '2017-11-01', 'Kunjungan Kerja', 'tahap1.jpg', 'Sub Bagian Umum', '', 2, 0, '2017-11-02 20:38:24'),
+	(3, '11', '0003', 'WPB.15/KP.01/2017', 'Surat Tugas Pemantauan Dana Desa', 'Kandepag', '2017-02-01', '2017-11-01', 'Kunjungan Kerja', 'tahap1.jpg', 'Sub Bagian Umum', '198508252006021011', 2, 0, '2017-11-02 20:38:24'),
+	(4, '12', '0004', 'WPB.15/KP.01/2017', 'Pemberitahuan Pemanfaatan Fasilitas', 'Kandepag', '2017-02-01', '2017-11-01', 'Kunjungan Kerja', 'tahap1.jpg', 'Sub Bagian Umum', '', 2, 0, '2017-11-02 20:38:24'),
+	(5, '12', '0005', 'WPB.15/KP.01/2017', 'Surat Tugas Pemantauan Proyek', 'PT A', '2017-03-02', '2017-11-02', '', '', 'Seksi Bank Giro Pos', '', 2, 0, '0000-00-00 00:00:00'),
+	(6, '11', '0006', 'WPB.15/KP.01/2017', 'Undangan Sosialisasi Aplikasi OMSPAN', 'Dinas Pariwisata DIY', '2017-03-01', '2017-11-02', '', 'favicon1.png', 'Seksi Verifikasi dan Akuntansi', '', 2, 0, '0000-00-00 00:00:00'),
+	(7, '12', '0007', 'WPB.15/KP.01/2017', 'Penyampaian langkah-langkah akhir tahun', 'Dinas PAriwisata Jakarta', '2017-04-02', '2017-11-02', '', 'tahap1v1.jpg', 'Seksi Bank Giro Pos', '', 2, 0, '0000-00-00 00:00:00'),
+	(8, '11', '0008', 'WPB.15/KP.01/2017', 'sdfsdf', 'Dinas Pariwisata DI Yogyakarta', '2017-04-07', '2017-11-07', 'd', '', 'Sub Bagian Umum', '198508252006021011', 10, 0, '2017-11-07 11:03:38'),
+	(9, '11', '0009', 'WPB.15/KP.01/2017', 'sadas', 'Dinas Pariwisata DI Yogyakarta', '2017-05-07', '2017-11-07', 'asdas', '', 'Sub Bagian Umum', '198508252006021011', 10, 0, '2017-11-07 11:11:58'),
+	(10, '12', '0010', 'WPB.15/KP.01/2017', 'Permintaan Penataan Jaringan', 'Kantor Pusat DJPBN', '2017-05-05', '2017-11-07', '', 'tahap11.jpg', 'Sub Bagian Umum', '198508252006021008', 10, 0, '2017-11-07 16:24:53');
 /*!40000 ALTER TABLE `t_surat_keluar` ENABLE KEYS */;
 
 
@@ -286,26 +286,28 @@ CREATE TABLE IF NOT EXISTS `t_surat_masuk` (
   `deleted` int(4) NOT NULL DEFAULT '0',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
-# Dumping data for table asamurat.t_surat_masuk: ~14 rows (approximately)
+# Dumping data for table asamurat.t_surat_masuk: ~17 rows (approximately)
 /*!40000 ALTER TABLE `t_surat_masuk` DISABLE KEYS */;
 INSERT INTO `t_surat_masuk` (`id`, `kode`, `no_agenda`, `indek_berkas`, `isi_ringkas`, `dari`, `no_surat`, `tgl_surat`, `tgl_diterima`, `keterangan`, `file`, `pengolah`, `deleted`, `create_date`) VALUES
-	(1, '11', '	0001', 'data', 'Permintaan data kunjungan wisatawan semester 1 tahun 2015', 'Dinas Pariwisata DIY', 'Par/HM.01/100/2015', '2017-05-22', '2017-05-24', '', 'Tes_Upload_file1.docx', 1, 0, '2017-11-02 20:57:11'),
-	(2, '12', '	0002', 'mmm', 'n', 'Dinas Pariwisata DIY', '100', '2017-10-03', '2017-10-31', 'mkll', 'tahap1v.jpg', 2, 0, '2017-11-02 20:57:11'),
-	(3, '13', '	0003', '', 'Penawaran barang', 'PT C', '112/2017', '2017-11-01', '2017-11-01', '', 'banner.jpg', 2, 0, '2017-11-02 20:57:11'),
-	(4, '14', '	0004', '', 'Invoice', 'PT A', '112/2017', '2017-11-01', '2017-11-01', '', 'banner.jpg', 2, 0, '2017-11-02 20:57:11'),
-	(5, '14', '	0005', '', 'Undangan Diklat', 'Dinas PAriwisata Jakarta', '112/PM/2017', '2017-11-01', '2017-11-02', '', 'box1.jpg', 2, 0, '2017-11-02 20:57:11'),
-	(6, '12', '	0006', '12312', '22sdasd', 'Dinas PAriwisata Jakarta', '1', '2017-11-01', '2017-11-02', '', 'favicon2.png', 2, 0, '0000-00-00 00:00:00'),
-	(7, '12', '	0007', 'a', 'w', 'PT C', 'w', '2017-11-01', '2017-11-02', 'surat undangan', 'box11.jpg', 2, 0, '0000-00-00 00:00:00'),
-	(8, '14', '	0008', '12', '12', 'qwwsa', '1', '2017-11-03', '2017-11-03', '', 'tahap1.jpg', 2, 0, '0000-00-00 00:00:00'),
-	(10, '12', '0009', '', 'Surat Undangan Diklat', 'Dinas PAriwisata Jakarta', 'S-001/PB.15/2017', '2017-11-04', '2017-11-04', '', 'cc_danamon.pdf', 2, 0, '0000-00-00 00:00:00'),
-	(11, '13', '0010', '', 'Undangan', 'Kantor Pariwisata', 'S-002/PB.15/2017', '2017-11-02', '2017-11-04', '', 'tahap11.jpg', 2, 0, '0000-00-00 00:00:00'),
-	(12, '12', '0011', '', 'sfdwedwed', 'Dinas Pariwisata DIY', '21', '2017-11-02', '2017-11-04', '', 'tahap1v1.jpg', 2, 0, '0000-00-00 00:00:00'),
-	(13, '11', '0012', '', 'asffadsd', 'Dinas Pariwisata DI Yogyakarta', 'S-004/PB.15/2017', '2017-11-03', '2017-11-04', '', 'tahap13.jpg', 2, 0, '0000-00-00 00:00:00'),
-	(14, '11', '0013', '', 'Surat Permintaan Nara Sumber Pelatihan Aplikasi', 'Dinas Pariwisata DIY', 'wqwq', '2017-11-02', '2017-11-04', '', 'tahap1v2.jpg', 2, 0, '0000-00-00 00:00:00'),
-	(15, '15', '0014', '', 'Permintaan Nara Sumber', 'Dinas Tenaga Kerja Manna', '119/PB.02/2017', '2017-10-03', '2017-11-06', '', 'tahap1v3.jpg', 2, 0, '0000-00-00 00:00:00'),
-	(16, '12', '0015', '', 'Pemberitahuan Maintenance OMSPAN', 'Kantor Pusat Dirjen Perbendaharaan', 'S-001/WPB.15/2017', '2017-11-05', '2017-11-07', '', 'cc_danamon2.pdf', 2, 0, '0000-00-00 00:00:00');
+	(1, '11', '	0001', 'data', 'Permintaan data kunjungan wisatawan semester 1 tahun 2015', 'Dinas Pariwisata DIY', 'Par/HM.01/100/2015', '2017-01-22', '2017-05-24', '', 'Tes_Upload_file1.docx', 1, 0, '2017-11-02 20:57:11'),
+	(2, '12', '	0002', 'mmm', 'n', 'Dinas Pariwisata DIY', '100', '2017-01-03', '2017-10-31', 'mkll', 'tahap1v.jpg', 2, 0, '2017-11-02 20:57:11'),
+	(3, '13', '	0003', '', 'Penawaran barang', 'PT C', '112/2017', '2017-01-01', '2017-11-01', '', 'banner.jpg', 2, 0, '2017-11-02 20:57:11'),
+	(4, '14', '	0004', '', 'Invoice', 'PT A', '112/2017', '2017-02-01', '2017-11-01', '', 'banner.jpg', 2, 0, '2017-11-02 20:57:11'),
+	(5, '14', '	0005', '', 'Undangan Diklat', 'Dinas PAriwisata Jakarta', '112/PM/2017', '2017-02-01', '2017-11-02', '', 'box1.jpg', 2, 0, '2017-11-02 20:57:11'),
+	(6, '12', '	0006', '12312', '22sdasd', 'Dinas PAriwisata Jakarta', '1', '2017-02-01', '2017-11-02', '', 'favicon2.png', 2, 0, '0000-00-00 00:00:00'),
+	(7, '12', '	0007', 'a', 'w', 'PT C', 'w', '2017-02-01', '2017-11-02', 'surat undangan', 'box11.jpg', 2, 0, '0000-00-00 00:00:00'),
+	(8, '14', '	0008', '12', '12', 'qwwsa', '1', '2017-03-03', '2017-11-03', '', 'tahap1.jpg', 2, 0, '0000-00-00 00:00:00'),
+	(10, '12', '0009', '', 'Surat Undangan Diklat', 'Dinas PAriwisata Jakarta', 'S-001/PB.15/2017', '2017-03-04', '2017-11-04', '', 'cc_danamon.pdf', 2, 0, '0000-00-00 00:00:00'),
+	(11, '13', '0010', '', 'Undangan', 'Kantor Pariwisata', 'S-002/PB.15/2017', '2017-04-02', '2017-11-04', '', 'tahap11.jpg', 2, 0, '0000-00-00 00:00:00'),
+	(12, '12', '0011', '', 'sfdwedwed', 'Dinas Pariwisata DIY', '21', '2017-04-02', '2017-11-04', '', 'tahap1v1.jpg', 2, 0, '0000-00-00 00:00:00'),
+	(13, '11', '0012', '', 'asffadsd', 'Dinas Pariwisata DI Yogyakarta', 'S-004/PB.15/2017', '2017-04-03', '2017-11-04', '', 'tahap13.jpg', 2, 0, '0000-00-00 00:00:00'),
+	(14, '11', '0013', '', 'Surat Permintaan Nara Sumber Pelatihan Aplikasi', 'Dinas Pariwisata DIY', 'wqwq', '2017-05-02', '2017-11-04', '', 'tahap1v2.jpg', 2, 0, '0000-00-00 00:00:00'),
+	(15, '15', '0014', '', 'Permintaan Nara Sumber', 'Dinas Tenaga Kerja Manna', '119/PB.02/2017', '2017-05-03', '2017-11-06', '', 'tahap1v3.jpg', 2, 0, '0000-00-00 00:00:00'),
+	(16, '12', '0015', '', 'Pemberitahuan Maintenance OMSPAN', 'Kantor Pusat Dirjen Perbendaharaan', 'S-001/WPB.15/2017', '2017-06-05', '2017-11-07', '', 'cc_danamon2.pdf', 2, 0, '0000-00-00 00:00:00'),
+	(17, '11', '', '', 'zxcdscdscs', 'asds', '21312', '2017-11-01', '2017-11-10', '', 'tahap14.jpg', 2, 1, '0000-00-00 00:00:00'),
+	(18, '13', '0016', '', 'dsvcsdvsdv', 'safds', '121321', '2017-11-08', '2017-11-10', '', 'tahap16.jpg', 2, 0, '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `t_surat_masuk` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
