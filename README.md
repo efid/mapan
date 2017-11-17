@@ -33,7 +33,7 @@ Aplikasi ASAMURAT yang merupakan kependekan dari Aplikasi SederhanA Manajemen sU
 3. Perbaikan di icon-icon setiap tombol
 4. Bisa digunakan di web server manapun tanpa harus setting disabled/enable php.ini
 
-#Versi 2.0 (Mei 2017)
+#Versi 2.0 (Nop 2017)
 Pengembangan dilakukan guna memenuhi tugas dan menyeseuaikan dengan sistem persuratan di KPPN
 1. Update bootstrap 3.3
 2. Dashboard, meliputi :
@@ -60,23 +60,23 @@ KK -> kasi -> Pelaksana
 
 5. Pengelompokan dan penambahan role user
 - Super Admin
- # Referensi
- # manajemen User
- # Pegawai (RUH)
+	>Referensi
+	>manajemen User
+	>Pegawai (RUH)
 - Umum
- # Surat masuk(RUH+upload)
- # Surat Keluar (Upload File)
+	> Surat masuk(RUH+upload)
+	> Surat Keluar (Upload File)
 - KK
- # Surat masuk(Disposisi)
- # Surat Keluar (Read)
- # Pegawai (Read)
+	> Surat masuk(Disposisi)
+	> Surat Keluar (Read)
+	> Pegawai (Read)
 - Kasi
- # Surat masuk(Disposisi)
- # Surat Keluar (Read)
- # Pegawai (Read)
+	> Surat masuk(Disposisi)
+	> Surat Keluar (Read)
+	> Pegawai (Read)
 - Pelaksana 
- # Surat masuk(Penyelesaian)
- # Surat Keluar (RUH)
- # Pegawai (Read)
+	> Surat masuk(Penyelesaian)
+	> Surat Keluar (RUH)
+	> Pegawai (Read)
 
 
