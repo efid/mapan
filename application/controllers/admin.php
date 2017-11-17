@@ -235,9 +235,14 @@ class Admin extends CI_Controller {
 			$a['page']		= "f_surat_masuk";
 			// var_dump($a['datpil']); die;
 		} else if ($mau_ke == "act_add") {
+			
+			$emailkk	= $this->db->query("SELECT nama,email from t_pegawai where jabatan='Kepala Kantor'")->row();
+			$email = $emailkk->email;
+			$nama = $emailkk->nama;			
+			//kirim email
+			$this->notif($email,$nama,$uraian,$dari,$no_surat,$tgl_surat);
 
-		// $sql = "INSERT INTO t_surat_masuk VALUES (NULL, '$kode', '$no_agenda', '$indek_berkas', '$uraian', '$dari', '$no_surat', '$tgl_surat', NOW(), '$ket', '".$up_data['file_name']."', '".$this->session->userdata('admin_id')."',0,'')";
-// echo $sql; die;		
+
 			if ($this->upload->do_upload('file_surat')) {
 				$up_data	 	= $this->upload->data();
 				
@@ -246,7 +251,11 @@ class Admin extends CI_Controller {
 				$this->db->query("INSERT INTO t_surat_masuk VALUES (NULL, '$kode', '$no_agenda', '$indek_berkas', '$uraian', '$dari', '$no_surat', '$tgl_surat', NOW(), '$ket', '', '".$this->session->userdata('admin_id')."',0,'')");
 			}	
 			
+			
+			
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been added. ".$this->upload->display_errors()."</div>");
+
+			
 			redirect('index.php/admin/surat_masuk');
 		} else if ($mau_ke == "act_edt") {
 			
@@ -586,12 +595,29 @@ class Admin extends CI_Controller {
 		} else if ($mau_ke == "act_add") {	
 			$this->db->query("INSERT INTO t_disposisi (id_surat,kpd_yth,isi_disposisi, tgl_disposisi1, sifat, batas_waktu, catatan, deleted ) VALUES ('$id_surat', '$kpd_yth', '$isi_disposisi',now(), '$sifat', '$batas_waktu', '$catatan','0')");
 			
+			$emailkasi	= $this->db->query("SELECT nama,email from t_pegawai where eselon = '4' and seksi='$kpd_yth'")->row();
+			$email = $emailkasi->email;
+			$nama = $emailkasi->nama;			
+			//kirim email
+			$surat	= $this->db->query("SELECT no_surat,tgl_surat, dari,isi_ringkas from t_surat_masuk where id ='$id_surat'")->row();
+			$uraian = $surat->isi_ringkas ;
+			$dari= $surat-> dari;
+			$no_surat = $surat-> no_surat;
+			$tgl_surat= tgl_jam_sql($surat-> tgl_surat);
+			$keterangan = $isi_disposisi.", Batas waktu :".tgl_jam_sql($batas_waktu) ;
+			$this->notif($email,$nama,$uraian,$dari,$no_surat,$tgl_surat,$keterangan);
+			
+			
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been added</div>");
 			redirect('index.php/admin/surat_disposisi/'.$id_surat);
+			
+			
 		} else if ($mau_ke == "act_edt") {
 				if ($this->session->userdata('admin_level') == "KK") {
-				$this->db->query("UPDATE t_disposisi SET kpd_yth = '$kpd_yth', isi_disposisi = '$isi_disposisi', sifat = '$sifat', batas_waktu = '$batas_waktu', catatan = '$catatan' WHERE id = '$idp'");					
+					$this->db->query("UPDATE t_disposisi SET kpd_yth = '$kpd_yth', isi_disposisi = '$isi_disposisi', sifat = '$sifat', batas_waktu = '$batas_waktu', catatan = '$catatan' WHERE id = '$idp'");					
 
+				
+				
 				} else if ($this->session->userdata('admin_level') == "Kasi") {
 					// var_dump($tgl_disposisi2) ; die;
 					
@@ -940,6 +966,86 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata("k", "<div id=\"alert\" class=\"alert alert-error\">username or password is not valid</div>");
 			redirect('index.php/admin/login');
 		}
+	}
+	
+	public function notif ($email,$nama,$uraian,$dari,$no_surat,$tgl_surat,$keterangan) {
+		$this->load->library('phpmailer.php');
+		// include base_url()"plugins/email/class.phpmailer.php";
+		// $no  = "S-1/PB.9/2017";
+		// $dari = "Kantor Pusat Ditjen Perbendaharaan";
+		// $perihal = "Penyampaian Perdirjen No. 13/PB.1/2017";
+		// $email = $email;
+		// $add2 = $nama;
+// var_dump($add1); die;
+		// $add1 = "dafidxxx@gmail.com";
+		// $add2 = "dafidxxx@gmail.com";
+		$message = '
+
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		<html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Untitled Document</title>
+		</head>
+
+
+		<body style="font-family:Verdana, Geneva, sans-serif;font-size:12px; background:#ffffcc">
+		<table width="100%" cellspacing="0" cellpadding="0" align="center" style="padding:20px;border:dashed 1px #333;"><tr><td>
+		Yth '.$nama.'
+		<br> <br> <br> Mohon segera menindaklanjuti surat masuk berikut :    <br><br>
+				<div style="float:left; width:75px; margin-bottom:5px;">No Surat</div>
+				<div style="float:left;"><strong>'.$no_surat.'</strong></div>
+				<div style="clear:both"></div>
+				<div style="float:left; width:75px; margin-bottom:5px;">Tgl Surat</div>
+				<div style="float:left;"><strong>'.$tgl_surat.'</strong></div>
+				<div style="clear:both"></div>
+				<div style="float:left; width:75px; margin-bottom:5px;">Pengirim</div>
+				<div style="float:left;"><strong>'.$dari.'</strong></div>
+				<div style="clear:both"></div>
+				<div style="float:left; width:75px; margin-bottom:5px;">Perihal</div>
+				<div style="float:left;"><strong>'.$uraian.'</strong></div>
+				<div style="clear:both"></div>
+				<div style="float:left; width:75px; margin-bottom:5px;">Keterangan</div>
+				<div style="float:left;"><strong>'.$keterangan.'</strong></div>
+				<div style="clear:both"></div>
+				<br>
+				<br>
+				<div style="float:left">Admin MAPAN - Manajemen Persuratan KPPN</div>
+		 <td><tr></table>
+		</body>
+		</html>';
+
+
+		$mail = new PHPMailer;
+		$mail->IsSMTP();
+		$mail->SMTPSecure = 'ssl';
+		$mail->Host = gethostbyname('smtp.gmail.com');
+		// $mail->Host = "smtp.gmail.com"; //host masing2 provider email
+
+		$mail->SMTPDebug = 0;
+		$mail->Port = 465;
+		$mail->SMTPAuth = true;
+		$mail->Username = "blogiouss@gmail.com"; //user email yang sebelumnya anda buat
+		$mail->Password = "minang2009"; //password email yang sebelumnya anda buat
+		$mail->SetFrom("info@aplikasi-mapan.com","Admin Manajemen Persuratan"); //set email pengirim
+		$mail->Subject = "Notifikasi Surat Masuk"; //subyek email
+		$mail->AddAddress($email,$nama);  //tujuan email
+		$mail->MsgHTML($message);
+		if($mail->Send()){
+
+
+		echo "Email Notifikasi berhasil dikirim";
+
+
+		}else {
+				echo "Tulis peringatan disini bila gagal pengiriman";
+
+
+			}
+
+
+
+		
 	}
 	
 	public function logout(){

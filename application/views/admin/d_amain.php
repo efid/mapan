@@ -65,6 +65,108 @@
 		select 'Proses' label, count(id_surat) value from t_disposisi where date(tgl_selesai) = '0000-00-00' and kpd_yth='Seksi Bank Giro Pos' ")->result();
 	// var_dump($subbagumum);die;
 	?>
+<?php 
+	$suratmasuk_bar	= $this->db->query("select 'jan' y, a.jml1, b.jml2, c.jml3, d.jml4 from (
+select count(no_surat) jml1 from disposisi where month(tgl_surat)=1 and kpd_yth='Sub Bagian Umum' ) a
+join (
+select count(no_surat) jml2 from disposisi where month(tgl_surat)=1 and kpd_yth='Seksi Verifikasi dan Akuntansi') b
+join (
+select count(no_surat) jml3 from disposisi where month(tgl_surat)=1 and kpd_yth='Seksi Bank Giro Pos') c
+join (
+select count(no_surat) jml4 from disposisi where month(tgl_surat)=1 and kpd_yth='Seksi Perbendaharaan') d
+union all
+select 'feb' y, a.jml1, b.jml2, c.jml3, d.jml4 from (
+select count(no_surat) jml1 from disposisi where month(tgl_surat)=2 and kpd_yth='Sub Bagian Umum' ) a
+join (
+select count(no_surat) jml2 from disposisi where month(tgl_surat)=2 and kpd_yth='Seksi Verifikasi dan Akuntansi') b
+join (
+select count(no_surat) jml3 from disposisi where month(tgl_surat)=2 and kpd_yth='Seksi Bank Giro Pos') c
+join (
+select count(no_surat) jml4 from disposisi where month(tgl_surat)=2 and kpd_yth='Seksi Perbendaharaan') d
+union all
+select 'mar' y, a.jml1, b.jml2, c.jml3, d.jml4 from (
+select count(no_surat) jml1 from disposisi where month(tgl_surat)=3 and kpd_yth='Sub Bagian Umum' ) a
+join (
+select count(no_surat) jml2 from disposisi where month(tgl_surat)=3 and kpd_yth='Seksi Verifikasi dan Akuntansi') b
+join (
+select count(no_surat) jml3 from disposisi where month(tgl_surat)=3 and kpd_yth='Seksi Bank Giro Pos') c
+join (
+select count(no_surat) jml4 from disposisi where month(tgl_surat)=3 and kpd_yth='Seksi Perbendaharaan') d
+union all
+select 'apr' y, a.jml1, b.jml2, c.jml3, d.jml4 from (
+select count(no_surat) jml1 from disposisi where month(tgl_surat)=4 and kpd_yth='Sub Bagian Umum' ) a
+join (
+select count(no_surat) jml2 from disposisi where month(tgl_surat)=4 and kpd_yth='Seksi Verifikasi dan Akuntansi') b
+join (
+select count(no_surat) jml3 from disposisi where month(tgl_surat)=4 and kpd_yth='Seksi Bank Giro Pos') c
+join (
+select count(no_surat) jml4 from disposisi where month(tgl_surat)=4 and kpd_yth='Seksi Perbendaharaan') d
+union all
+select 'mei' y, a.jml1, b.jml2, c.jml3, d.jml4 from (
+select count(no_surat) jml1 from disposisi where month(tgl_surat)=5 and kpd_yth='Sub Bagian Umum' ) a
+join (
+select count(no_surat) jml2 from disposisi where month(tgl_surat)=5 and kpd_yth='Seksi Verifikasi dan Akuntansi') b
+join (
+select count(no_surat) jml3 from disposisi where month(tgl_surat)=5 and kpd_yth='Seksi Bank Giro Pos') c
+join (
+select count(no_surat) jml4 from disposisi where month(tgl_surat)=5 and kpd_yth='Seksi Perbendaharaan') d
+union all
+select 'jun' y, a.jml1, b.jml2, c.jml3, d.jml4 from (
+select count(no_surat) jml1 from disposisi where month(tgl_surat)=6 and kpd_yth='Sub Bagian Umum' ) a
+join (
+select count(no_surat) jml2 from disposisi where month(tgl_surat)=6 and kpd_yth='Seksi Verifikasi dan Akuntansi') b
+join (
+select count(no_surat) jml3 from disposisi where month(tgl_surat)=6 and kpd_yth='Seksi Bank Giro Pos') c
+join (
+select count(no_surat) jml4 from disposisi where month(tgl_surat)=6 and kpd_yth='Seksi Perbendaharaan') d
+union all
+select 'jul' y, a.jml1, b.jml2, c.jml3, d.jml4 from (
+select count(no_surat) jml1 from disposisi where month(tgl_surat)=7 and kpd_yth='Sub Bagian Umum' ) a
+join (
+select count(no_surat) jml2 from disposisi where month(tgl_surat)=7 and kpd_yth='Seksi Verifikasi dan Akuntansi') b
+join (
+select count(no_surat) jml3 from disposisi where month(tgl_surat)=7 and kpd_yth='Seksi Bank Giro Pos') c
+join (
+select count(no_surat) jml4 from disposisi where month(tgl_surat)=7 and kpd_yth='Seksi Perbendaharaan') d
+union all
+select 'ags' y, a.jml1, b.jml2, c.jml3, d.jml4 from (
+select count(no_surat) jml1 from disposisi where month(tgl_surat)=8 and kpd_yth='Sub Bagian Umum' ) a
+join (
+select count(no_surat) jml2 from disposisi where month(tgl_surat)=8 and kpd_yth='Seksi Verifikasi dan Akuntansi') b
+join (
+select count(no_surat) jml3 from disposisi where month(tgl_surat)=8 and kpd_yth='Seksi Bank Giro Pos') c
+join (
+select count(no_surat) jml4 from disposisi where month(tgl_surat)=8 and kpd_yth='Seksi Perbendaharaan') d
+union all
+select 'sep' y, a.jml1, b.jml2, c.jml3, d.jml4 from (
+select count(no_surat) jml1 from disposisi where month(tgl_surat)=9 and kpd_yth='Sub Bagian Umum' ) a
+join (
+select count(no_surat) jml2 from disposisi where month(tgl_surat)=9 and kpd_yth='Seksi Verifikasi dan Akuntansi') b
+join (
+select count(no_surat) jml3 from disposisi where month(tgl_surat)=9 and kpd_yth='Seksi Bank Giro Pos') c
+join (
+select count(no_surat) jml4 from disposisi where month(tgl_surat)=9 and kpd_yth='Seksi Perbendaharaan') d
+union all
+select 'okt' y, a.jml1, b.jml2, c.jml3, d.jml4 from (
+select count(no_surat) jml1 from disposisi where month(tgl_surat)=10 and kpd_yth='Sub Bagian Umum' ) a
+join (
+select count(no_surat) jml2 from disposisi where month(tgl_surat)=10 and kpd_yth='Seksi Verifikasi dan Akuntansi') b
+join (
+select count(no_surat) jml3 from disposisi where month(tgl_surat)=10 and kpd_yth='Seksi Bank Giro Pos') c
+join (
+select count(no_surat) jml4 from disposisi where month(tgl_surat)=10 and kpd_yth='Seksi Perbendaharaan') d
+union all
+select 'nop' y, a.jml1, b.jml2, c.jml3, d.jml4 from (
+select count(no_surat) jml1 from disposisi where month(tgl_surat)=11 and kpd_yth='Sub Bagian Umum' ) a
+join (
+select count(no_surat) jml2 from disposisi where month(tgl_surat)=11 and kpd_yth='Seksi Verifikasi dan Akuntansi') b
+join (
+select count(no_surat) jml3 from disposisi where month(tgl_surat)=11 and kpd_yth='Seksi Bank Giro Pos') c
+join (
+select count(no_surat) jml4 from disposisi where month(tgl_surat)=11 and kpd_yth='Seksi Perbendaharaan') d
+")->result();
+	// var_dump($suratmasuk_bar);die;
+	?>
 
 
 
@@ -136,7 +238,7 @@
                 <div class="icon">
                   <i class="fa fa-folder-o"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>index.php/admin/surat_masuk_disp" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>index.php/admin/surat_masuk" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
 			<div class="col-lg-3 col-xs-6">
@@ -149,7 +251,7 @@
                 <div class="icon">
                   <i class="fa fa-folder-o"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>index.php/admin/surat_masuk_disp" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>index.php/admin/surat_masuk" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
 			
@@ -254,22 +356,13 @@ labels: ['Value']
 
 
 <script>
+
+//suratmasuk_bar
 Morris.Bar({
   element: 'bar-masuk',
-  data: [
-    { y: 'jan', a: 100, b: 90, c:50,d:20 },
-    { y: 'peb', a: 75,  b: 65, c:50,d:20  },
-    { y: 'mar', a: 50,  b: 40, c:50,d:20  },
-    { y: 'apr', a: 75,  b: 65, c:50,d:20  },
-    { y: 'mei', a: 50,  b: 40, c:50,d:20  },
-    { y: 'jun', a: 75,  b: 65, c:50,d:20  },
-    { y: 'jul', a: 100, b: 90, c:50,d:20  },
-    { y: 'ags', a: 100, b: 90, c:50,d:20  },
-    { y: 'sep', a: 100, b: 90, c:50,d:20  },
-    { y: 'okt', a: 100, b: 90, c:50,d:20  },
-  ],
+  data: <?php echo json_encode($suratmasuk_bar); ?>,
   xkey: 'y',
-  ykeys: ['a', 'b','c','d'],
+  ykeys: ['jml1', 'jml2','jml3','jml4'],
   labels: ['Sub Bag Umum', 'Seksi Vera','Seksi Bank Giro Pos','Seksi Perbendaharaan']
 });
 </script>

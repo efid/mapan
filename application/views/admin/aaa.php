@@ -60,6 +60,8 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
+    <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/email/class.phpmailer.php">
+
 
     <!-- jQuery 2.1.4 -->
     <script src="<?php echo base_url(); ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
