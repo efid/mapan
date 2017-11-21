@@ -16,7 +16,7 @@ if ($mode == "edt" || $mode == "act_edt") {
 <div class="navbar navbar-inverse">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Klasifikasi Surat (Peraturan Menteri Agama Nomor 44 Tahun 2010)
+			<a class="navbar-brand" href="#">Klasifikasi Surat 
 </a>
 		</div>
 	</div><!-- /.container -->
