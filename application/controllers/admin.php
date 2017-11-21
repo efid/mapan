@@ -92,40 +92,55 @@ class Admin extends CI_Controller {
 		//ambil variabel Postingan
 		$idp					= addslashes($this->input->post('idp'));
 		$nama					= addslashes($this->input->post('nama'));
-		$uraian					= addslashes($this->input->post('uraian'));
-	
+		$nip					= addslashes($this->input->post('nip'));
+		$seksi					= addslashes($this->input->post('seksi'));
+		$jabatan					= addslashes($this->input->post('jabatan'));
+		$eselon					= addslashes($this->input->post('eselon'));
+		$email					= addslashes($this->input->post('email'));
+		
 		$cari					= addslashes($this->input->post('q'));
 
 		
-				$nip = $this->session->userdata('admin_nip');
-		$seksi = $this->session->userdata('admin_seksi');
+		$niplogin = $this->session->userdata('admin_nip');
+		$seksilogin = $this->session->userdata('admin_seksi');
 		if ($this->session->userdata('admin_level') == "Staf") {
-			$sql="SELECT * from t_pegawai WHERE nip='$nip' LIMIT $awal, $akhir ";
+			$sql="SELECT * from t_pegawai WHERE deleted=0 and nip='$niplogin' LIMIT $awal, $akhir ";
 			// var_dump($sql);die;
 				
 			}else if ($this->session->userdata('admin_level') == "Kasi"){				
-			$sql ="SELECT * from t_pegawai WHERE  seksi = '$seksi' order by nama asc LIMIT $awal, $akhir";
+			$sql ="SELECT * from t_pegawai WHERE deleted=0 and  seksi = '$seksilogin' order by nama asc LIMIT $awal, $akhir";
 					
 			}else {				
-			$sql ="SELECT * from t_pegawai order by nama asc LIMIT $awal, $akhir";
+			$sql ="SELECT * from t_pegawai where deleted=0 order by nama asc LIMIT $awal, $akhir";
 					
 			}
 
-		
-		
-		
-		if ($mau_ke == "cari") {
-			$a['data']		= $this->db->query("SELECT * FROM ref_klasifikasi WHERE nama LIKE '%$cari%' OR uraian LIKE '%$cari%' ORDER BY id DESC")->result();
-			$a['page']		= "l_klas_surat";
+		if ($mau_ke == "del") {
+			$this->db->query("UPDATE t_pegawai SET deleted = 1 WHERE id = '$idu'");
+			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been deleted </div>");
+			redirect('index.php/admin/pegawai');
+		} else if ($mau_ke == "cari") {
+			$a['data']		= $this->db->query("SELECT * FROM t_pegawai WHERE nama LIKE '%$cari%' OR nip LIKE '%$cari%' ORDER BY nama DESC")->result();
+			$a['page']		= "l_pegawai";
 		} else if ($mau_ke == "add") {
-			$a['page']		= "f_klas_surat";
+			$a['page']		= "f_pegawai";
 		} else if ($mau_ke == "edt") {
-			$a['datpil']	= $this->db->query("SELECT * FROM ref_klasifikasi WHERE id = '$idu'")->row();	
-			$a['page']		= "f_klas_surat";
+			$a['datpil']	= $this->db->query("SELECT * FROM t_pegawai WHERE id = '$idu'")->row();	
+			$a['page']		= "f_pegawai";
 		} else if ($mau_ke == "act_edt") {
-			$this->db->query("UPDATE ref_klasifikasi SET nama = '$nama', uraian = '$uraian' WHERE id = '$idp'");
+			$sql="UPDATE t_pegawai SET nama = '$nama', nip = '$nip',seksi='$seksi', jabatan='$jabatan', eselon='$eselon', email='$email' WHERE id = '$idp'";
+// var_dump($sql) ; die;
+
+			$this->db->query($sql);
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been updated</div>");			
-			redirect('index.php/admin/klas_surat');
+			redirect('index.php/admin/pegawai');
+		} else if ($mau_ke == "act_add") {
+			$sql="INSERT INTO t_pegawai (nama, nip, seksi, jabatan, eselon,email,deleted) value ('$nama', '$nip', '$seksi','$jabatan','$eselon','$email','0')";
+// var_dump($sql) ; die;
+
+			$this->db->query($sql);
+			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been updated</div>");			
+			redirect('index.php/admin/pegawai');
 		} else {
 			$a['data']		= $this->db->query($sql)->result();
 			$a['page']		= "l_pegawai";
@@ -253,7 +268,7 @@ class Admin extends CI_Controller {
 			
 			
 			
-			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been added. ".$this->upload->display_errors()."</div>");
+			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been added. Email notifikasi telah dikirim ke ".$email.$this->upload->display_errors()."</div>");
 
 			
 			redirect('index.php/admin/surat_masuk');
@@ -608,7 +623,7 @@ class Admin extends CI_Controller {
 			$this->notif($email,$nama,$uraian,$dari,$no_surat,$tgl_surat,$keterangan);
 			
 			
-			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been added</div>");
+			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been added. Email notifikasi telah dikirim ke ".$email." </div>");
 			redirect('index.php/admin/surat_disposisi/'.$id_surat);
 			
 			
@@ -620,14 +635,36 @@ class Admin extends CI_Controller {
 				
 				} else if ($this->session->userdata('admin_level') == "Kasi") {
 					// var_dump($tgl_disposisi2) ; die;
+
+					$emailstaf	= $this->db->query("SELECT nama,email from t_pegawai where nip='$nip'")->row();
+						$email = $emailstaf->email;
+						$nama = $emailstaf->nama;			
+						//kirim email
+						$surat	= $this->db->query("SELECT a.isi_disposisi,a.batas_waktu,a.id_surat, b.no_surat,b.tgl_surat, b.dari,b.isi_ringkas from t_disposisi a left join t_surat_masuk b on a.id_surat=b.id where a.id ='$idp'")->row();
+						// var_dump($surat) ; die;
+						
+						$isi_disposisi = $surat->isi_disposisi ;
+						$batas_waktu = $surat->batas_waktu ;
+						$uraian = $surat->isi_ringkas ;
+						$dari= $surat-> dari;
+						$no_surat = $surat-> no_surat;
+						$tgl_surat= tgl_jam_sql($surat-> tgl_surat);
+						$keterangan = $isi_disposisi.", Batas waktu :".tgl_jam_sql($batas_waktu) ;
+						$this->notif($email,$nama,$uraian,$dari,$no_surat,$tgl_surat,$keterangan);
+					
 					
 					if ($tgl_disposisi2=="0000-00-00 00:00:00"){
 						$sql="UPDATE t_disposisi SET nip_pelaksana = '$nip',tgl_disposisi2=now() WHERE id = '$idp'";
+						// $sql="";
 						$this->db->query($sql);
+	
+						
 					}else{
 						$sql="UPDATE t_disposisi SET nip_pelaksana = '$nip' WHERE id = '$idp'";
 						$this->db->query($sql);
 					}
+					$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been updated. Email notifikasi telah dikirim ke ".$email." </div>");
+								
 				} else if ($this->session->userdata('admin_level') == "Staf") {
 					
 					if ($tgl_selesai=="0000-00-00 00:00:00"){
@@ -645,7 +682,7 @@ class Admin extends CI_Controller {
 				}
 			
 
-			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been updated</div>");			
+						
 			redirect('index.php/admin/surat_disposisi/'.$id_surat);
 		} else {
 			

@@ -28,9 +28,17 @@ th {
 				<span class="navbar-brand" style = "color:white">Daftar Pegawai</span>
 			</div>
 		<div class="navbar-collapse collapse navbar-inverse-collapse" style="margin-right: 20px">
+						<?php
+			if ($this->session->userdata('admin_level') == "Umum") {
+			?>
+			<ul class="nav navbar-nav">
+			<li><a href="<?php echo base_URL(); ?>index.php/admin/pegawai/add" class="btn btn-success" style="color:white"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a></li>
+			</ul>
+			<?php }?>
+			
 			
 			<ul class="nav navbar-nav navbar-right">
-				<form class="navbar-form navbar-left" method="post" action="<?php echo base_URL(); ?>index.php/admin/klas_surat/cari">
+				<form class="navbar-form navbar-left" method="post" action="<?php echo base_URL(); ?>index.php/admin/pegawai/cari">
 					<input type="text" class="form-control" name="q" style="width: 200px" placeholder="Kata kunci pencarian ..." required>
 					<button type="submit" class="btn btn-danger"><i class="icon-search icon-white"> </i> Cari</button>
 				</form>
@@ -63,7 +71,7 @@ th {
 			<th width="15%">Nama</th>
 			<th width="15%">NIP</th>
 			<th width="20%">Seksi</th>
-			<th width="15%">jabatan</th>
+			<th width="15%">Jabatan</th>
 			<th width="15%">Email</th>
 			<th width="15%">Aksi</th>
 			
@@ -94,7 +102,8 @@ th {
 			?>
 			<td class="ctr">
 				<div class="btn-group">
-					<a href="<?php echo base_URL(); ?>index.php/admin/klas_surat/edt/<?php echo $b->id; ?>" class="btn btn-success btn-sm"><i class="icon-edit icon-white"> </i> Edit</a>
+					<a href="<?php echo base_URL(); ?>index.php/admin/pegawai/edt/<?php echo $b->id; ?>" class="btn btn-success btn-sm"><i class="icon-edit icon-white"> </i> Ubah</a>
+					<a href="<?php echo base_URL()?>index.php/admin/pegawai/del/<?php echo $b->id?>" class="btn btn-warning btn-sm" title="Hapus Data" onclick="return confirm('Anda Yakin..?')"><i class="icon-trash icon-remove">  </i> Hapus</a>
 				</div>					
 			</td>
 			<?php 

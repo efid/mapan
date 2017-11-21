@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-	<title>.:: MAPAN ONLINE - MANAJEMEN PERSURATAN ONLINE::.</title>
+	<title>.:: MAPAN - MANAJEMEN PERSURATAN::.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
 	<style type="text/css">
@@ -66,7 +66,9 @@
     <!-- jQuery 2.1.4 -->
     <script src="<?php echo base_url(); ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>-->
+
+    <script src="<?php echo base_url(); ?>plugins/jQueryUI/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
       $.widget.bridge('uibutton', $.ui.button);
@@ -75,7 +77,8 @@
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
     <!-- Morris.js charts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script> 
+    <script src="<?php echo base_url(); ?>plugins/raphael/raphael-min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script> -->
     <script src="<?php echo base_url(); ?>plugins/morris/morris.min.js"></script>
     <!-- Sparkline -->
     <script src="<?php echo base_url(); ?>plugins/sparkline/jquery.sparkline.min.js"></script>
