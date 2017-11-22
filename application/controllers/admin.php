@@ -253,9 +253,10 @@ class Admin extends CI_Controller {
 			
 			$emailkk	= $this->db->query("SELECT nama,email from t_pegawai where jabatan='Kepala Kantor'")->row();
 			$email = $emailkk->email;
-			$nama = $emailkk->nama;			
+			$nama = $emailkk->nama;	
+			$keterangan="";
 			//kirim email
-			$this->notif($email,$nama,$uraian,$dari,$no_surat,$tgl_surat);
+			$this->notif($email,$nama,$uraian,$dari,$no_surat,$tgl_surat,$keterangan);
 
 
 			if ($this->upload->do_upload('file_surat')) {
@@ -1048,6 +1049,8 @@ class Admin extends CI_Controller {
 				<br>
 				<br>
 				<div style="float:left">Admin MAPAN - Manajemen Persuratan KPPN</div>
+				<br>
+				<div style="float:left">https://mapan.asia</div>
 		 <td><tr></table>
 		</body>
 		</html>';
@@ -1056,15 +1059,17 @@ class Admin extends CI_Controller {
 		$mail = new PHPMailer;
 		$mail->IsSMTP();
 		$mail->SMTPSecure = 'ssl';
-		$mail->Host = gethostbyname('smtp.gmail.com');
+		// $mail->Host = gethostbyname('smtp.gmail.com');
+		$mail->Host = gethostbyname('iix03.whmbox.com');
 		// $mail->Host = "smtp.gmail.com"; //host masing2 provider email
 
 		$mail->SMTPDebug = 0;
 		$mail->Port = 465;
 		$mail->SMTPAuth = true;
-		$mail->Username = "blogiouss@gmail.com"; //user email yang sebelumnya anda buat
+		// $mail->Username = "blogiouss@gmail.com"; //user email yang sebelumnya anda buat
+		$mail->Username = "notif@mapan.asia"; //user email yang sebelumnya anda buat
 		$mail->Password = "minang2009"; //password email yang sebelumnya anda buat
-		$mail->SetFrom("info@aplikasi-mapan.com","Admin Manajemen Persuratan"); //set email pengirim
+		$mail->SetFrom("notif@mapan.asia","Admin Manajemen Persuratan"); //set email pengirim
 		$mail->Subject = "Notifikasi Surat Masuk"; //subyek email
 		$mail->AddAddress($email,$nama);  //tujuan email
 		$mail->MsgHTML($message);
@@ -1075,7 +1080,7 @@ class Admin extends CI_Controller {
 
 
 		}else {
-				echo "Tulis peringatan disini bila gagal pengiriman";
+				echo "gagal pengiriman";
 
 
 			}
