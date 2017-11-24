@@ -66,9 +66,9 @@
 				<td><?php echo $d->kode; ?></td>
 				<td><?php echo $d->isi_ringkas; ?></td>
 				<td><?php echo $d->tujuan; ?></td>
-				<td><?php echo $d->no_surat; ?></td>
+				<td><?php echo $d->no_surat1."/".$d->no_surat2; ?></td>
 				<td><?php echo tgl_jam_sql($d->tgl_surat); ?></td>
-				<td><?php echo gval("t_admin", "id", "nama", $d->pengolah); ?></td>
+				<td><?php echo gval("t_pegawai", "nip", "nama", $d->nip); ?></td>
 				<td><?php echo $d->keterangan; ?></td>
 			</tr>
 			<?php 

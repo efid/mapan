@@ -35,6 +35,7 @@
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>aset/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>aset/css/bootstrap.css" media="screen"> 
+    <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/datatables/dataTables.bootstrap.css">	
 
     <!-- Font Awesome 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> -->
@@ -318,5 +319,24 @@
  
     </div>
 
-  
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+      $(function () {
+        $("#example1").DataTable({          
+          "language": {
+            "url": "<?php echo base_url(); ?>plugins/datatables/Indonesian.json",
+            "sEmptyTable": "Tidak ada data di database"
+        }
+        });
+      });
+      $(function() {
+          $( "#tgl_surats" ).datepicker({ 
+            autoclose: true 
+          });
+        });
+    </script>
+    <script src="<?php echo base_url(); ?>plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url(); ?>plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+	
 </body></html>

@@ -37,12 +37,7 @@ th {
 			<?php }?>
 			
 			
-			<ul class="nav navbar-nav navbar-right">
-				<form class="navbar-form navbar-left" method="post" action="<?php echo base_URL(); ?>index.php/admin/pegawai/cari">
-					<input type="text" class="form-control" name="q" style="width: 200px" placeholder="Kata kunci pencarian ..." required>
-					<button type="submit" class="btn btn-danger"><i class="icon-search icon-white"> </i> Cari</button>
-				</form>
-			</ul>
+			
 		</div><!-- /.nav-collapse -->
 		</div><!-- /.container -->
 	</div><!-- /.navbar -->
@@ -64,7 +59,7 @@ th {
 </div>	
 -->
 
-<table class="table table-bordered table-hover">
+<table  id="example1" class="table table-bordered table-hover">
 	<thead>
 		<tr>
 			<th width="5%">Nomor</th>
@@ -119,5 +114,5 @@ th {
 		?>
 	</tbody>
 </table>
-<center><ul class="pagination"><?php echo $pagi; ?></ul></center>
+
 </div>

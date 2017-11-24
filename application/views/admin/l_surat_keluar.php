@@ -1,3 +1,23 @@
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+
+
 <div class="clearfix">
 <div class="row">
   <div class="col-lg-12">
@@ -15,12 +35,7 @@
 				<li><a href="<?php echo base_URL(); ?>index.php/admin/surat_keluar/add" class="btn btn-success" style="color:white"><i class="fa fa-plus" > </i> Tambah Data</a></li>
 			</ul>
 	<?php } ?>
-			<ul class="nav navbar-nav navbar-right">
-				<form class="navbar-form navbar-left" method="post" action="<?php echo base_URL(); ?>index.php/admin/surat_keluar/cari">
-					<input type="text" class="form-control" name="q" style="width: 200px" placeholder="Kata kunci pencarian ..." required>
-					<button type="submit" class="btn btn-danger"><i class="icon-search icon-white"> </i> Cari</button>
-				</form>
-			</ul>
+			
 		</div><!-- /.nav-collapse -->
 		</div><!-- /.container -->
 	</div><!-- /.navbar -->
@@ -31,9 +46,10 @@
 <?php echo $this->session->flashdata("k");?>
 	
 
-<table class="table table-bordered table-hover">
+<table id ="example1" class="table table-bordered table-hover dataTable">
 	<thead>
 		<tr>
+			<th width="5%">No.</th>
 			<th width="20%">No. Surat</th>
 			<th width="10%">Tgl. Surat</th>
 			<th width="30%">Isi Ringkas, File</th>
@@ -48,9 +64,12 @@
 			echo "<tr><td colspan='5'  style='text-align: center; font-weight: bold'>--Data tidak ditemukan--</td></tr>";
 		} else {
 			$no 	= ($this->uri->segment(4) + 1);
+			$urut = 1 ;
 			foreach ($data as $b) {
+			$nomor = $urut++;
 		?>
 		<tr>
+			<td><?php echo $nomor;?></td>
 			<td><?php echo $b->no_surat1."/".$b->no_surat2;?></td>
 			<td><?php echo "<i>".tgl_jam_sql($b->tgl_surat)."</i>"?></td>
 			<td><?php echo $b->isi_ringkas."<br><b>File : </b><i><a href='".base_URL()."upload/surat_keluar/".$b->file."' target='_blank'>".$b->file."</a>"?></td>
@@ -59,11 +78,11 @@
 			<td class="ctr">
 
 				<div class="btn-group">
-					<a href="<?php echo base_URL()?>index.php/admin/surat_keluar/edt/<?php echo $b->id?>" class="btn btn-success btn-sm"><i class="icon-edit icon-white"> </i> Edit</a>
+					<a href="<?php echo base_URL()?>index.php/admin/surat_keluar/edt/<?php echo $b->id?>" class="btn btn-success btn-sm" title="Ubah Data"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 					
 					<?php if ($this->session->userdata('admin_level') == "Staf") {	?>						
-					<a href="<?php echo base_URL()?>index.php/admin/surat_keluar/del/<?php echo $b->id?>" class="btn btn-warning btn-sm" onclick="return confirm('Anda Yakin..?')">
-					<i class="icon-trash icon-white"> </i> Hapus</a>
+					<a href="<?php echo base_URL()?>index.php/admin/surat_keluar/del/<?php echo $b->id?>" class="btn btn-warning btn-sm" title="Hapus Data" onclick="return confirm('Anda Yakin..?')">
+					<i class="fa fa-trash-o" aria-hidden="true"></i></a>
 					<?php }?>
 				</div>	
 				
@@ -76,5 +95,5 @@
 		?>
 	</tbody>
 </table>
-<center><ul class="pagination"><?php echo $pagi; ?></ul></center>
+
 </div>

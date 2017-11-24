@@ -38,13 +38,7 @@ th {
 			</ul>
 			<?php }?>
 			
-			<ul class="nav navbar-nav navbar-right">
-				<form class="navbar-form navbar-left" method="post" action="<?php echo base_URL(); ?>index.php/admin/surat_masuk/cari">
-					<input type="text" class="form-control" name="q" style="width: 200px" placeholder="Kata kunci pencarian ..." required>
-					<button type="submit" class="btn btn-danger"><i class="icon-search icon-white"> </i> Cari</button>
-				</form>
-			</ul>
-		</div><!-- /.nav-collapse -->
+			</div><!-- /.nav-collapse -->
 		</div><!-- /.container -->
 	</div><!-- /.navbar -->
 	
@@ -65,7 +59,7 @@ th {
 </div>	
 -->
 
-<table class="table table-bordered table-hover">
+<table id="example1"  class="table table-bordered table-hover">
 	<thead>
 		<tr>
 			<th width="3%">No.</th>
@@ -128,10 +122,10 @@ th {
 					if ($this->session->userdata('admin_level') == "Umum") {
 				?>				
 				<div class="btn-group">
-					<a href="<?php echo base_URL()?>index.php/admin/surat_masuk/edt/<?php echo $b->id?>" class="btn btn-success btn-sm" title="Edit Data"><i class="icon-edit icon-white"> </i> Ubah</a>
-					<a href="<?php echo base_URL()?>index.php/admin/surat_masuk/del/<?php echo $b->id?>" class="btn btn-warning btn-sm" title="Hapus Data" onclick="return confirm('Anda Yakin..?')"><i class="icon-trash icon-remove">  </i> Hapus</a>			
+					<a href="<?php echo base_URL()?>index.php/admin/surat_masuk/edt/<?php echo $b->id?>" class="btn btn-success btn-sm" title="Ubah Data"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+					<a href="<?php echo base_URL()?>index.php/admin/surat_masuk/del/<?php echo $b->id?>" class="btn btn-warning btn-sm" title="Hapus Data" onclick="return confirm('Anda Yakin..?')"><i class="icon-trash icon-remove">  </i> <i class="fa fa-trash-o" aria-hidden="true"></i></a>			
 					
-					<a href="<?php echo base_URL()?>index.php/admin/disposisi_cetak/<?php echo $b->id?>" class="btn btn-info btn-sm" target="_blank" title="Cetak Disposisi"><i class="icon-print icon-white"> </i> Cetak</a>
+					<a href="<?php echo base_URL()?>index.php/admin/disposisi_cetak/<?php echo $b->id?>" class="btn btn-info btn-sm" target="_blank" title="Cetak Disposisi"><i class="icon-print icon-white"> </i> <i class="fa fa-print" aria-hidden="true"></i></a>
 				</div>	
 				
 				<?php } ?>
@@ -168,5 +162,5 @@ th {
 		?>
 	</tbody>
 </table>
-<center><ul class="pagination"><?php echo $pagi; ?></ul></center>
+
 </div>

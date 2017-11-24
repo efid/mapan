@@ -154,7 +154,7 @@
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3><?php echo $disp->jml; ?></h3>
+                  <h3><?php echo $dispkasi->jml; ?></h3>
                   <p>Dalam Proses</p>
                 </div>
                 <div class="icon">

@@ -50,8 +50,8 @@
 				<th width="18%">Dari</td>
 				<th width="17%">Nomor Surat</td>
 				<th width="7%">Tgl. Surat</td>
-				<th width="10%">Pengolah</td>
-				<th width="7%">Tgl, Paraf</td>
+				
+				<th width="7%">Tgl diterima</td>
 				<th width="5%">Ket</td>
 			</tr>
 		</thead>
@@ -69,7 +69,7 @@
 				<td><?php echo $d->dari; ?></td>
 				<td><?php echo $d->no_surat; ?></td>
 				<td><?php echo tgl_jam_sql($d->tgl_surat); ?></td>
-				<td><?php echo gval("t_admin", "id", "nama", $d->pengolah); ?></td>
+				
 				<td><?php echo tgl_jam_sql($d->tgl_diterima); ?></td>
 				<td><?php echo $d->keterangan; ?></td>
 			</tr>

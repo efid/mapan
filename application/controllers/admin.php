@@ -104,14 +104,14 @@ class Admin extends CI_Controller {
 		$niplogin = $this->session->userdata('admin_nip');
 		$seksilogin = $this->session->userdata('admin_seksi');
 		if ($this->session->userdata('admin_level') == "Staf") {
-			$sql="SELECT * from t_pegawai WHERE deleted=0 and nip='$niplogin' LIMIT $awal, $akhir ";
+			$sql="SELECT * from t_pegawai WHERE deleted=0 and nip='$niplogin' ";
 			// var_dump($sql);die;
 				
 			}else if ($this->session->userdata('admin_level') == "Kasi"){				
-			$sql ="SELECT * from t_pegawai WHERE deleted=0 and  seksi = '$seksilogin' order by nama asc LIMIT $awal, $akhir";
+			$sql ="SELECT * from t_pegawai WHERE deleted=0 and  seksi = '$seksilogin' order by nama asc ";
 					
 			}else {				
-			$sql ="SELECT * from t_pegawai where deleted=0 order by nama asc LIMIT $awal, $akhir";
+			$sql ="SELECT * from t_pegawai where deleted=0 order by nama asc ";
 					
 			}
 
@@ -211,7 +211,7 @@ class Admin extends CI_Controller {
 				left join ref_klasifikasi b on a.kode=b.kode 
 				left join (select distinct id_surat from t_disposisi ) c on a.id=c.id_surat
 				left join (select distinct id_surat,nip_pelaksana,selesai from t_disposisi where nip_pelaksana <> '' group by id_surat) d on a.id=d.id_surat
-				WHERE a.deleted = 0 and YEAR(tgl_diterima) = '$ta' and nip_pelaksana='$nip' order by a.id desc LIMIT $awal, $akhir ";
+				WHERE a.deleted = 0 and YEAR(tgl_diterima) = '$ta' and nip_pelaksana='$nip' order by a.id desc ";
 				// var_dump($sql);die;
 				
 			}else if ($this->session->userdata('admin_level') == "Kasi"){				
@@ -220,7 +220,7 @@ class Admin extends CI_Controller {
 				left join ref_klasifikasi b on a.kode=b.kode 
 				left join (select distinct id_surat,kpd_yth from t_disposisi ) c on a.id=c.id_surat
 				left join (select distinct id_surat,nip_pelaksana,selesai from t_disposisi where nip_pelaksana <> '' group by id_surat) d on a.id=d.id_surat
-				WHERE a.deleted = 0 and YEAR(tgl_diterima) = '$ta' and c.kpd_yth = '$seksi' order by a.id desc LIMIT $awal, $akhir";
+				WHERE a.deleted = 0 and YEAR(tgl_diterima) = '$ta' and c.kpd_yth = '$seksi' order by a.id desc ";
 					
 			}else {				
 			$sql ="SELECT a.*,b.nama,c.id_surat ,d.nip_pelaksana,d.selesai
@@ -228,7 +228,7 @@ class Admin extends CI_Controller {
 				left join ref_klasifikasi b on a.kode=b.kode 
 				left join (select distinct id_surat from t_disposisi ) c on a.id=c.id_surat
 				left join (select distinct id_surat,nip_pelaksana,selesai from t_disposisi where nip_pelaksana <> '' group by id_surat) d on a.id=d.id_surat
-				WHERE a.deleted = 0 and YEAR(tgl_diterima) = '$ta' order by a.id desc LIMIT $awal, $akhir";
+				WHERE a.deleted = 0 and YEAR(tgl_diterima) = '$ta' order by a.id desc ";
 					
 				}
 					
@@ -484,15 +484,15 @@ class Admin extends CI_Controller {
 		$seksi = $this->session->userdata('admin_seksi');
 
 		if ($this->session->userdata('admin_level') == "Kasi") {		
-			$sql="SELECT * FROM t_surat_keluar WHERE deleted=0 and seksi = '$seksi' and YEAR(tgl_catat) = '$ta' order by id desc LIMIT $awal, $akhir ";
+			$sql="SELECT * FROM t_surat_keluar WHERE deleted=0 and seksi = '$seksi' and YEAR(tgl_catat) = '$ta' order by id desc ";
 
 		}else if($this->session->userdata('admin_level') == "Staf"){
 			
-			$sql="SELECT * FROM t_surat_keluar WHERE deleted=0 and nip='$nip' and YEAR(tgl_catat) = '$ta' order by id desc LIMIT $awal, $akhir";
+			$sql="SELECT * FROM t_surat_keluar WHERE deleted=0 and nip='$nip' and YEAR(tgl_catat) = '$ta' order by id desc ";
 			
 		}else{
 			
-			$sql="SELECT * FROM t_surat_keluar WHERE deleted=0 and YEAR(tgl_catat) = '$ta' order by id desc LIMIT $awal, $akhir";
+			$sql="SELECT * FROM t_surat_keluar WHERE deleted=0 and YEAR(tgl_catat) = '$ta' order by id desc ";
 			
 		}
 
@@ -783,7 +783,7 @@ class Admin extends CI_Controller {
 			$a['data']	= $this->db->query("SELECT * FROM t_surat_masuk WHERE tgl_diterima >= '$tgl_start' AND tgl_diterima <= '$tgl_end' ORDER BY id")->result(); 
 			$this->load->view('admin/agenda_surat_masuk', $a);
 		} else {
-			$a['data']	= $this->db->query("SELECT * FROM t_surat_keluar WHERE tgl_catat >= '$tgl_start' AND tgl_catat <= '$tgl_end' ORDER BY id")->result();
+			$a['data']	= $this->db->query("SELECT * FROM t_surat_keluar WHERE tgl_surat >= '$tgl_start' AND tgl_surat <= '$tgl_end' ORDER BY id")->result();
 			$this->load->view('admin/agenda_surat_keluar', $a);
 		}
 	}	
@@ -870,7 +870,7 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data has been updated </div>");			
 			redirect('index.php/admin/manage_admin');
 		} else {
-			$a['data']		= $this->db->query("SELECT a.*,b.nama,b.jabatan,b.seksi FROM t_admin a left join t_pegawai b on a.nip=b.nip  where a.deleted=0 order by b.seksi,a.level LIMIT $awal, $akhir ")->result();
+			$a['data']		= $this->db->query("SELECT a.*,b.nama,b.jabatan,b.seksi FROM t_admin a left join t_pegawai b on a.nip=b.nip  where a.deleted=0 order by b.seksi,a.level ")->result();
 			$a['page']		= "l_manage_admin";
 		}
 		
@@ -1089,6 +1089,9 @@ class Admin extends CI_Controller {
 
 		
 	}
+	
+	
+
 	
 	public function logout(){
         $this->session->sess_destroy();
