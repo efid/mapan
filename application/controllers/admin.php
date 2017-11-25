@@ -210,7 +210,7 @@ class Admin extends CI_Controller {
 				FROM t_surat_masuk a 
 				left join ref_klasifikasi b on a.kode=b.kode 
 				left join (select distinct id_surat from t_disposisi ) c on a.id=c.id_surat
-				left join (select distinct id_surat,nip_pelaksana,selesai from t_disposisi where nip_pelaksana <> '' group by id_surat) d on a.id=d.id_surat
+				left join (select distinct id_surat,nip_pelaksana,selesai from t_disposisi where nip_pelaksana <> '' group by id_surat,nip_pelaksana) d on a.id=d.id_surat
 				WHERE a.deleted = 0 and YEAR(tgl_diterima) = '$ta' and nip_pelaksana='$nip' order by a.id desc ";
 				// var_dump($sql);die;
 				
@@ -324,7 +324,7 @@ class Admin extends CI_Controller {
 						// left join (select distinct id_surat,nip_pelaksana from t_disposisi where nip_pelaksana <> '' group by id_surat) d on a.id=d.id_surat
 						// WHERE a.deleted = 0 and YEAR(tgl_diterima) = '$ta' order by a.id desc LIMIT $awal, $akhir";
 					$a['data'] = $this->db->query($sql)->result();
-						// var_dump($a['data']);die;
+						// var_dump($sql); die;
 					} 
 		$a['page']		= "l_surat_masuk";
 

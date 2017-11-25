@@ -118,7 +118,7 @@
                   <p>Surat Keluar</p>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-paper-plane"></i>
+                  <i class="fa  fa-arrow-circle-up"></i>
                 </div>
                 <a href="<?php echo base_url(); ?>index.php/admin/surat_keluar" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -132,7 +132,7 @@
                   <p>Surat Masuk</p>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-folder-o"></i>
+                  <i class="fa fa-arrow-circle-down"></i>
                 </div>
                 <a href="<?php echo base_url(); ?>index.php/admin/surat_masuk" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -158,7 +158,7 @@
                   <p>Dalam Proses</p>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-folder-o"></i>
+                  <i class="fa  fa-refresh"></i>
                 </div>
                 <a href="<?php echo base_url(); ?>index.php/admin/surat_masuk" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
